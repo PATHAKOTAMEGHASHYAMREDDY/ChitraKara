@@ -1,28 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/artisthome.css";
 import { useLocation } from "react-router-dom";
+
 function Artisthome() {
-  // Form States
-  const Location = useLocation();
-  const username = Location.state?.username;
+  const location = useLocation();
+  const username = location.state?.username;
   const [paintingTitle, setPaintingTitle] = useState("");
   const [image, setImage] = useState(null);
   const [price, setPrice] = useState("");
   const [contact, setContact] = useState("");
+  const [paintings, setPaintings] = useState([]);
 
-  // Assume artist name comes from authentication (hardcoded for now)
-  const artistName = "John Doe";
+  // Fetch Paintings
+  useEffect(() => {
+    const fetchPaintings = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/paintings");
+        setPaintings(response.data);
+      } catch (error) {
+        console.error("Error fetching paintings:", error);
+      }
+    };
+    fetchPaintings();
+  }, []);
 
   // Handle Form Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const formData = new FormData();
     formData.append("title", paintingTitle);
     formData.append("image", image);
     formData.append("price", price);
     formData.append("contact", contact);
+    formData.append("artist", username);
 
     try {
       const response = await axios.post(
@@ -35,12 +46,13 @@ function Artisthome() {
         }
       );
       alert(response.data.message);
-
-      // Reset Form
       setPaintingTitle("");
       setImage(null);
       setPrice("");
       setContact("");
+      // Refresh paintings
+      const updatedPaintings = await axios.get("http://localhost:5000/api/paintings");
+      setPaintings(updatedPaintings.data);
     } catch (error) {
       alert(error.response?.data?.error || "Upload Failed");
     }
@@ -48,12 +60,8 @@ function Artisthome() {
 
   return (
     <div className="artisthome-container">
-      {/* Welcome Message */}
       <h1>Welcome, {username}!</h1>
-      <p>
-        Showcase your beautiful paintings and reach out to art enthusiasts around the world. 
-        Upload your artwork below and let your creativity shine!
-      </p>
+      <p>Showcase your beautiful paintings to the world!</p>
 
       {/* Upload Form */}
       <div className="upload-form-container">
@@ -81,7 +89,7 @@ function Artisthome() {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="price">Price (in &#8377;)</label>
+            <label htmlFor="price">Price (in ₹)</label>
             <input
               type="number"
               id="price"
@@ -104,6 +112,26 @@ function Artisthome() {
           </div>
           <button type="submit">Upload Painting</button>
         </form>
+      </div>
+
+      {/* Display All Paintings */}
+      <div className="paintings-container">
+        <h2>Your Uploaded Paintings</h2>
+        {paintings.length > 0 ? (
+          paintings
+            .filter((painting) => painting.artist === username)
+            .map((painting) => (
+              <div key={painting._id} className="painting-card">
+                <img src={painting.imageUrl} alt={painting.title} />
+                <h3>{painting.title}</h3>
+                <p>Price: ₹{painting.price}</p>
+                <p>Contact: {painting.contact}</p>
+                <p>Artist: {painting.artist}</p>
+              </div>
+            ))
+        ) : (
+          <p>No paintings uploaded yet!</p>
+        )}
       </div>
     </div>
   );
