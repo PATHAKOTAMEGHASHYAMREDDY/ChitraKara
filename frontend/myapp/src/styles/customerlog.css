@@ -1,125 +1,198 @@
+/* 🌟 General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
 body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-    color: #333;
-    margin: 0;
-    padding: 0;
+  background: #f8f9fa;
+}
+
+/* 🌟 Customer Log Page */
+.customerlog-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* 🎨 Customer Intro Section */
+.customer-intro {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-bottom: 30px;
+  max-width: 800px;
+  transition: all 0.3s ease-in-out;
+}
+
+.customer-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+}
+
+.customer-description,
+.customer-highlight {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* 📝 Forms */
+.form-container {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  width: 380px;
+  text-align: center;
+  margin-bottom: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.form-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.form-input:focus {
+  border-color: #00897b;
+  outline: none;
+}
+
+/* 🟢 Buttons */
+.form-button {
+  width: 100%;
+  padding: 10px;
+  background: #00897b;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.form-button:hover {
+  background: #007368;
+}
+
+/* 📌 Scroll Icons */
+.scroll-down,
+.scroll-up {
+  cursor: pointer;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 🏠 Home Button */
+button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  font-size: 16px;
+  background: #ff6f00;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+  background: #e65c00;
+}
+
+/* 🔻 Responsive Design */
+@media (max-width: 768px) {
+  .customer-intro {
+    padding: 20px;
+    max-width: 90%;
   }
-  
-  /* Main Container */
-  .customerlog-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 50px 20px;
-    text-align: center;
-  }
-  
-  /* Content Section */
-  .customer-content {
-    max-width: 600px;
-    margin-bottom: 30px;
-  }
-  
-  .customer-content h1 {
-    font-family: 'Georgia', serif;
-    color: #00796b;
-    font-size: 2.8em;
-    margin-bottom: 10px;
-  }
-  
-  .customer-content p {
-    color: #555;
-    line-height: 1.6;
-    font-size: 1.1em;
-  }
-  
-  /* Forms Container */
-  .forms-container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    max-width: 800px;
-    width: 100%;
-    flex-wrap: wrap;
-  }
-  
-  /* Form Box */
+
   .form-container {
-    background: #fff;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    padding: 20px;
+  }
+
+  .form-input {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .form-button {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .customer-title {
+    font-size: 24px;
+  }
+
+  .customer-description,
+  .customer-highlight {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .customer-intro {
+    padding: 15px;
+  }
+
+  .form-container {
     width: 100%;
-    max-width: 350px;
-    box-sizing: border-box;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 15px;
   }
-  
-  .form-container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+
+  .form-title {
+    font-size: 20px;
   }
-  
-  .form-container h2 {
-    font-family: 'Georgia', serif;
-    color: #00796b;
-    margin-bottom: 20px;
-    font-size: 1.8em;
+
+  .form-input {
+    font-size: 13px;
+    padding: 6px;
   }
-  
-  /* Form Group */
-  .form-group {
-    text-align: left;
-    margin-bottom: 15px;
+
+  .form-button {
+    font-size: 13px;
+    padding: 8px;
   }
-  
-  .form-group label {
-    display: block;
-    color: #444;
-    margin-bottom: 5px;
-    font-weight: bold;
+
+  button {
+    font-size: 14px;
+    padding: 8px;
   }
-  
-  .form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .form-group input:focus {
-    border-color: #00796b;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 121, 107, 0.5);
-  }
-  
-  /* Buttons */
-  button[type="submit"] {
-    background: linear-gradient(45deg, #009688, #4db6ac);
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.3s;
-    font-size: 1em;
-    width: 100%;
-    margin-top: 10px;
-  }
-  
-  button[type="submit"]:hover {
-    background: linear-gradient(45deg, #4db6ac, #009688);
-    transform: scale(1.05);
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .forms-container {
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-  
+}

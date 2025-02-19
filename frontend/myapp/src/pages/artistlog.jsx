@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "../styles/artistlog.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ArrowDown, ArrowUp } from "lucide-react"; // Importing icons
 
 function Artistlog() {
-  // Login Form States
   const navigate = useNavigate();
+
+  // Login Form States
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
@@ -13,6 +15,19 @@ function Artistlog() {
   const [sname, setSignupName] = useState("");
   const [signupEmail, setSignupEmail] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
+
+  // Refs for scrolling
+  const loginRef = useRef(null);
+  const signupRef = useRef(null);
+
+  // Smooth Scroll Function
+  const scrollToSignup = () => {
+    signupRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const scrollToLogin = () => {
+    loginRef.current.scrollIntoView({ behavior: "smooth" });
+  };
 
   // Handle Login Submit
   const handleLoginSubmit = async (e) => {
@@ -24,9 +39,8 @@ function Artistlog() {
       });
       alert(response.data.message);
       setLoginEmail("");
-    setLoginPassword("");
-      navigate("/artisthome",{state:{username:response.data.username}});
-      // Add your redirect or further actions here
+      setLoginPassword("");
+      navigate("/artisthome", { state: { username: response.data.username } });
     } catch (error) {
       alert(error.response?.data?.error || "Login Failed");
     }
@@ -45,7 +59,7 @@ function Artistlog() {
       setSignupName("");
       setSignupEmail("");
       setSignupPassword("");
-      // Add your redirect or further actions here
+      scrollToLogin(); // Scrolls back to login after signup success
     } catch (error) {
       alert(error.response?.data?.error || "Signup Failed");
     }
@@ -53,94 +67,108 @@ function Artistlog() {
 
   return (
     <div className="artistlog-container">
-      {/* Content about Chitrakara (Artist) */}
-      <div className="artist-content">
+      
+      {/* 🌟 Artist Introduction Section */}
+      <div className="artist-intro">
         <h1 className="artist-title">Welcome to Chitrakara</h1>
         <p className="artist-description">
-          Chitrakara is a platform where talented artists can showcase and sell their paintings to art enthusiasts worldwide. Join us to explore unique artworks and support independent artists.
+          🎨 **Chitrakara** is a platform for artists to showcase their talent, sell unique paintings, and connect with art lovers around the world.  
+          Whether you are a passionate creator or an art enthusiast, join us in celebrating creativity and craftsmanship.  
+        </p>
+        <p className="artist-highlight">
+          Join today and be part of a vibrant community where **art meets passion!**
         </p>
       </div>
 
-      {/* Forms Container */}
-      <div className="forms-container">
-        {/* Login Form */}
-        <div className="form-container">
-          <h2 className="form-title">Login</h2>
-          <form className="form" onSubmit={handleLoginSubmit}>
-            <div className="form-group">
-              <label className="form-label" htmlFor="login-email">Email</label>
-              <input
-                className="form-input"
-                type="email"
-                id="login-email"
-                placeholder="Enter your email"
-                value={loginEmail}
-                onChange={(e) => setLoginEmail(e.target.value)}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label className="form-label" htmlFor="login-password">Password</label>
-              <input
-                className="form-input"
-                type="password"
-                id="login-password"
-                placeholder="Enter your password"
-                value={loginPassword}
-                onChange={(e) => setLoginPassword(e.target.value)}
-                required
-              />
-            </div>
-            <button className="form-button" type="submit">Login</button>
-          </form>
-        </div>
-
-        {/* Signup Form */}
-        <div className="form-container">
-          <h2 className="form-title">Sign Up</h2>
-          <form className="form" onSubmit={handleSignupSubmit}>
-            <div className="form-group">
-              <label className="form-label" htmlFor="signup-name">Full Name</label>
-              <input
-                className="form-input"
-                type="text"
-                id="signup-name"
-                placeholder="Enter your full name"
-                value={sname}
-                onChange={(e) => setSignupName(e.target.value)}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label className="form-label" htmlFor="signup-email">Email</label>
-              <input
-                className="form-input"
-                type="email"
-                id="signup-email"
-                placeholder="Enter your email"
-                value={signupEmail}
-                onChange={(e) => setSignupEmail(e.target.value)}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label className="form-label" htmlFor="signup-password">Password</label>
-              <input
-                className="form-input"
-                type="password"
-                id="signup-password"
-                placeholder="Enter your password"
-                value={signupPassword}
-                onChange={(e) => setSignupPassword(e.target.value)}
-                required
-              />
-            </div>
-            <button className="form-button" type="submit">Sign Up</button>
-          </form>
+      {/* Login Section */}
+      <div className="form-container" ref={loginRef}>
+        <h2 className="form-title">Login</h2>
+        <form className="form" onSubmit={handleLoginSubmit}>
+          <div className="form-group">
+            <label className="form-label" htmlFor="login-email">Email</label>
+            <input
+              className="form-input"
+              type="email"
+              id="login-email"
+              placeholder="Enter your email"
+              value={loginEmail}
+              onChange={(e) => setLoginEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label" htmlFor="login-password">Password</label>
+            <input
+              className="form-input"
+              type="password"
+              id="login-password"
+              placeholder="Enter your password"
+              value={loginPassword}
+              onChange={(e) => setLoginPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button className="form-button" type="submit">Login</button>
+        </form>
+        {/* Scroll Down Icon */}
+        <br></br>
+        <p>Click on arrow to Sign Up</p>
+        <div className="scroll-down" onClick={scrollToSignup}>
+          <ArrowDown size={30} color="#00897B" />
         </div>
       </div>
-      <button onClick={()=>{
-        navigate("/")}}>Home</button>
+
+      {/* Signup Section */}
+      <div className="form-container" ref={signupRef}>
+        <h2 className="form-title">Sign Up</h2>
+        <form className="form" onSubmit={handleSignupSubmit}>
+          <div className="form-group">
+            <label className="form-label" htmlFor="signup-name">Full Name</label>
+            <input
+              className="form-input"
+              type="text"
+              id="signup-name"
+              placeholder="Enter your full name"
+              value={sname}
+              onChange={(e) => setSignupName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label" htmlFor="signup-email">Email</label>
+            <input
+              className="form-input"
+              type="email"
+              id="signup-email"
+              placeholder="Enter your email"
+              value={signupEmail}
+              onChange={(e) => setSignupEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label" htmlFor="signup-password">Password</label>
+            <input
+              className="form-input"
+              type="password"
+              id="signup-password"
+              placeholder="Enter your password"
+              value={signupPassword}
+              onChange={(e) => setSignupPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button className="form-button" type="submit">Sign Up</button>
+        </form>
+        {/* Scroll Up Icon */}
+        <br></br>
+        <p>Existing user ? Login</p>
+        <div className="scroll-up" onClick={scrollToLogin}>
+          <ArrowUp size={30} color="#00897B" />
+        </div>
+      </div>
+
+      <button onClick={() => navigate("/")}>Home</button>
     </div>
   );
 }

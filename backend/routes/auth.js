@@ -7,6 +7,8 @@ const multer = require("multer");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const cloudinary = require("cloudinary").v2;
 const Painting = require("../models/painting");
+const bcrypt = require("bcrypt");
+const Order=require("../models/orders");
 // Cloudinary Configuration
 cloudinary.config({
   cloud_name: "dktvtxucf",
@@ -49,6 +51,7 @@ router.post("/artistsignup", async (req, res) => {
   }
 });
 
+
 // Artist Login Route
 router.post("/artistlogin", async (req, res) => {
   try {
@@ -74,7 +77,35 @@ router.post("/artistlogin", async (req, res) => {
     res.status(500).send({ error: "Server Error during Login" });
   }
 });
+router.post("/order", async (req, res) => {
+  try {
+    const { customerName, artistName, paintingTitle, price, contact, imageUrl } = req.body;
 
+    const order = new Order({
+      customerName,
+      artistName,
+      paintingTitle,
+      price,
+      contact,
+      imageUrl,
+    });
+
+    await order.save();
+    res.status(201).json({ message: "Order placed successfully!" });
+  } catch (error) {
+    console.error("Order Error:", error);
+    res.status(500).json({ error: "Failed to place order" });
+  }
+});
+router.get("/orders",async(req,res)=>{
+  try{
+    const orders=await Order.find();
+    res.status(200).json(orders);
+  }catch(error){
+    console.error("Error fetching orders:",error);
+    res.status(500).json({error:"Failed to fetch orders"});
+  }
+})
 // Customer Signup Route
 router.post("/customersignup", async (req, res) => {
   try {

@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Home.css";
+import logo from "../assets/logo.png"; // Adjust the path as needed
 
 function Home() {
   const navigate = useNavigate();
-  
-  
 
   const handleArtist = () => {
     navigate("/artistlog");
@@ -17,25 +16,22 @@ function Home() {
 
   return (
     <div className="home-container">
-      <header className="home-header">
-        <h1 className="home-title">Welcome to Chitrakara</h1>
-        <p className="home-subtitle">
-          Your gateway to creativity – where artists and customers connect.
-        </p>
-      </header>
+      {/* Logo Section */}
+      <div className="logo-container">
+        <img src={logo} alt="Chitrakara Logo" className="home-logo" />
+      </div>
 
-      <section className="about-section">
-        <h2 className="about-title">About Us</h2>
-        <p className="about-description">
-          Chitrakara is a unique platform that bridges the gap between{" "}
-          <strong>talented artists</strong> and
-          <strong> passionate customers</strong>. Whether you are an artist
-          looking to showcase your artwork or a customer searching for
-          personalized sketches, we provide the perfect digital space for
-          collaboration and inspiration.
-        </p>
-      </section>
+      {/* Buttons Section */}
+      <div className="button-container">
+        <button className="artist-btn" onClick={handleArtist}>
+          I am an Artist
+        </button>
+        <button className="customer-btn" onClick={handleCustomer}>
+          I am a Customer
+        </button>
+      </div>
 
+      {/* Why Choose Us Section */}
       <section className="features-section">
         <h2 className="features-title">Why Choose Chitrakara?</h2>
         <div className="features">
@@ -60,23 +56,18 @@ function Home() {
         </div>
       </section>
 
-      <div className="cta-section">
-        <h2 className="cta-title">Join Our Creative Community</h2>
-        <p className="cta-description">
-          Start your journey today! Whether you are an artist or a customer,
-          Chitrakara is here to empower your creativity.
+      {/* About Us Section */}
+      <section className="about-section">
+        <h2 className="about-title">About Us</h2>
+        <p className="about-description">
+          Chitrakara is a unique platform that bridges the gap between
+          <strong> talented artists</strong> and
+          <strong> passionate customers</strong>. Whether you are an artist
+          looking to showcase your artwork or a customer searching for
+          personalized sketches, we provide the perfect digital space for
+          collaboration and inspiration.
         </p>
-      </div>
-
-      <div className="button-container">
-        <button className="artist-btn" onClick={handleArtist}>
-          I am an Artist
-        </button>
-
-        <button className="customer-btn" onClick={handleCustomer}>
-          I am a Customer
-        </button>
-      </div>
+      </section>
     </div>
   );
 }

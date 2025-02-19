@@ -5,7 +5,8 @@ import Artistlog from "./pages/artistlog.jsx";
 import Customerlog from "./pages/customerlog.jsx";
 import Artisthome from "./pages/artisthome.jsx";
 import Customerhome from "./pages/customerhome.jsx";
-
+import Artistpaintings from "./pages/artistpaintings.jsx";
+import ArtistOrders from "./pages/ArtistOrders.jsx";
 function App() {
   return (
     <BrowserRouter>
@@ -15,6 +16,8 @@ function App() {
         <Route path="/customerlog" element={<Customerlog />} />
         <Route path="/artisthome" element={<Artisthome />} />
         <Route path="/customerhome" element={<Customerhome />} />
+        <Route path="/artistpaintings" element={<Artistpaintings />} />
+        <Route path="/artistorders" element={<ArtistOrders/>} />
       </Routes>
     </BrowserRouter>
   );

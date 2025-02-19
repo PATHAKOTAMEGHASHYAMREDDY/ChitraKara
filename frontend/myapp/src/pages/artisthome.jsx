@@ -1,29 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/artisthome.css";
-import { useLocation } from "react-router-dom";
+import logo1 from "../assets/logo1.png"; // Add your logo file in the assets folder
 
 function Artisthome() {
   const location = useLocation();
+  const navigate = useNavigate();
   const username = location.state?.username;
   const [paintingTitle, setPaintingTitle] = useState("");
   const [image, setImage] = useState(null);
   const [price, setPrice] = useState("");
   const [contact, setContact] = useState("");
-  const [paintings, setPaintings] = useState([]);
-
-  // Fetch Paintings
-  useEffect(() => {
-    const fetchPaintings = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/api/paintings");
-        setPaintings(response.data);
-      } catch (error) {
-        console.error("Error fetching paintings:", error);
-      }
-    };
-    fetchPaintings();
-  }, []);
 
   // Handle Form Submit
   const handleSubmit = async (e) => {
@@ -50,9 +38,6 @@ function Artisthome() {
       setImage(null);
       setPrice("");
       setContact("");
-      // Refresh paintings
-      const updatedPaintings = await axios.get("http://localhost:5000/api/paintings");
-      setPaintings(updatedPaintings.data);
     } catch (error) {
       alert(error.response?.data?.error || "Upload Failed");
     }
@@ -60,6 +45,15 @@ function Artisthome() {
 
   return (
     <div className="artisthome-container">
+      {/* Logo linking to artist's paintings page */}
+      <img
+        src={logo1}
+        alt="Artist Paintings"
+        className="logo"
+        onClick={() => navigate("/artistpaintings", { state: { username } })}
+      />
+      <button onClick={()=>navigate('/artistorders',{state:{username}})}>go to your orders</button>
+
       <h1>Welcome, {username}!</h1>
       <p>Showcase your beautiful paintings to the world!</p>
 
@@ -112,26 +106,6 @@ function Artisthome() {
           </div>
           <button type="submit">Upload Painting</button>
         </form>
-      </div>
-
-      {/* Display All Paintings */}
-      <div className="paintings-container">
-        <h2>Your Uploaded Paintings</h2>
-        {paintings.length > 0 ? (
-          paintings
-            .filter((painting) => painting.artist === username)
-            .map((painting) => (
-              <div key={painting._id} className="painting-card">
-                <img src={painting.imageUrl} alt={painting.title} />
-                <h3>{painting.title}</h3>
-                <p>Price: ₹{painting.price}</p>
-                <p>Contact: {painting.contact}</p>
-                <p>Artist: {painting.artist}</p>
-              </div>
-            ))
-        ) : (
-          <p>No paintings uploaded yet!</p>
-        )}
       </div>
     </div>
   );

@@ -1,114 +1,176 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #f8e1f4, #fde2e4);
-    color: #333;
-    margin: 0;
-    padding: 0;
+/* General Container */
+.artistlog-container {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  padding: 20px;
+  background-color: #E0F2F1; /* Soft Teal Background */
+  min-height: 100vh;
+}
+
+/* Form Container */
+.form-container {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 400px;
+  margin: 20px auto;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.form-container:hover {
+  transform: translateY(-5px);
+}
+
+/* Form Titles */
+.form-title {
+  font-size: 22px;
+  color: #004D40; /* Deep Teal */
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+/* Form Fields */
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #00796B;
+  margin-bottom: 5px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #B2DFDB;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  border-color: #00796B;
+  outline: none;
+}
+
+/* Buttons */
+.form-button {
+  background-color: #00897B;
+  color: white;
+  padding: 12px 18px;
+  border: none;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  width: 100%;
+  font-weight: 600;
+}
+
+.form-button:hover {
+  background-color: #00695C;
+}
+
+/* Scroll Icons */
+.scroll-down,
+.scroll-up {
+  margin-top: 15px;
+  cursor: pointer;
+  animation: bounce 1.5s infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.scroll-down:hover,
+.scroll-up:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
   }
-  
-  /* Overall Container */
-  .artistlog-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 50px 20px;
-    text-align: center;
+  50% {
+    transform: translateY(8px);
   }
-  
-  /* Main Content */
-  .artist-content {
-    max-width: 600px;
-    margin-bottom: 30px;
-  }
-  
-  .artist-title {
-    font-family: 'Georgia', serif;
-    color: #4b2e83;
-    font-size: 2.5em;
-    margin-bottom: 10px;
-  }
-  
-  .artist-description {
-    color: #5c5470;
-    line-height: 1.6;
-  }
-  
-  /* Forms Container */
-  .forms-container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    max-width: 800px;
-    width: 100%;
-    flex-wrap: wrap;
-  }
-  
-  /* Form Card Style */
+}
+
+/* Home Button */
+button {
+  margin-top: 20px;
+  background-color: #004D40;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background-color: #002D27;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .form-container {
-    background: #fff;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 350px;
-    box-sizing: border-box;
+    width: 95%;
+    padding: 20px;
   }
-  
-  .form-title {
-    font-family: 'Georgia', serif;
-    color: #4b2e83;
-    margin-bottom: 20px;
-  }
-  
-  .form-group {
-    text-align: left;
-    margin-bottom: 15px;
-  }
-  
-  .form-label {
-    display: block;
-    color: #444;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
+
   .form-input {
-    width: 100%;
+    font-size: 14px;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
   }
-  
-  .form-input:focus {
-    border-color: #c73866;
-    outline: none;
-    box-shadow: 0 0 5px rgba(199, 56, 102, 0.5);
-  }
-  
-  /* Buttons */
+
   .form-button {
-    background: linear-gradient(45deg, #6a0572, #c73866);
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: background 0.3s;
-    font-size: 1em;
-    width: 100%;
-    margin-top: 10px;
+    font-size: 14px;
   }
+}
+/* 🌟 Artist Introduction Section Styles */
+.artist-intro {
+
+  background: rgba(255, 255, 255, 0.9); /* Light background with slight transparency */
+  padding: 20px;
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Soft shadow effect */
+  text-align: center;
+  margin: 0px auto; /* Centering the section */
+  max-width: 100%; /* Restrict width for a clean look */
   
-  .form-button:hover {
-    background: linear-gradient(45deg, #c73866, #6a0572);
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .forms-container {
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-  
+}
+
+.artist-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333; /* Dark gray for contrast */
+  margin-bottom: 10px;
+}
+
+.artist-description {
+  font-size: 16px;
+  color: #555; /* Softer gray for text */
+  line-height: 1.6;
+}
+
+.artist-highlight {
+  font-size: 18px;
+  font-weight: bold;
+  color: #00897B; /* Highlight color */
+  margin-top: 10px;
+}
