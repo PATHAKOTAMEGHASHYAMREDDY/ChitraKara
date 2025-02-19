@@ -33,7 +33,7 @@ function Home() {
 
       {/* Why Choose Us Section */}
       <section className="features-section">
-        <h2 className="features-title">Why Choose Chitrakara?</h2>
+        <h2 className="features-title">Why Choose Chitrakar?</h2>
         <div className="features">
           <div className="feature-card">
             <h3 className="feature-title">🎨 Showcase Your Art</h3>
@@ -60,13 +60,15 @@ function Home() {
       <section className="about-section">
         <h2 className="about-title">About Us</h2>
         <p className="about-description">
-          Chitrakara is a unique platform that bridges the gap between
+          Chitrakar is a unique platform that bridges the gap between
           <strong> talented artists</strong> and
           <strong> passionate customers</strong>. Whether you are an artist
           looking to showcase your artwork or a customer searching for
           personalized sketches, we provide the perfect digital space for
           collaboration and inspiration.
         </p>
+        <br></br>
+        <p>For Enquiry contact +91 9392950661</p>
       </section>
     </div>
   );

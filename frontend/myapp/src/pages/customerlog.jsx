@@ -73,9 +73,9 @@ function Customerlog() {
     <div className="customerlog-container">
       {/* 🌟 Customer Introduction Section */}
       <div className="customer-intro">
-        <h1 className="customer-title">Welcome to Chitrakara</h1>
+        <h1 className="customer-title">Hey Art Enthusiast</h1>
         <p className="customer-description">
-          🛍️ **Chitrakara** is a platform for art lovers to discover and purchase unique, handcrafted paintings.
+          🛍️ **Chitrakar** is a platform for art lovers to discover and purchase unique, handcrafted paintings.
           Whether you're looking to decorate your space or support talented artists, join our growing art community!
         </p>
         <p className="customer-highlight">

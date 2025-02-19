@@ -158,7 +158,7 @@ button:hover {
 .artist-title {
   font-size: 28px;
   font-weight: bold;
-  color: #333; /* Dark gray for contrast */
+  color: rgb(0, 38, 255); /* Dark gray for contrast */
   margin-bottom: 10px;
 }
 

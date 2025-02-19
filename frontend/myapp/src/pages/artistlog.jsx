@@ -70,9 +70,9 @@ function Artistlog() {
       
       {/* 🌟 Artist Introduction Section */}
       <div className="artist-intro">
-        <h1 className="artist-title">Welcome to Chitrakara</h1>
+        <h1 className="artist-title">Hey Chitrakar</h1>
         <p className="artist-description">
-          🎨 **Chitrakara** is a platform for artists to showcase their talent, sell unique paintings, and connect with art lovers around the world.  
+          🎨 **Chitrakar** is a platform for artists to showcase their talent, sell unique paintings, and connect with art lovers around the world.  
           Whether you are a passionate creator or an art enthusiast, join us in celebrating creativity and craftsmanship.  
         </p>
         <p className="artist-highlight">
