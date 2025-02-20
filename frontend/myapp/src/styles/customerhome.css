@@ -1,0 +1,273 @@
+/* General Container */
+.customerhome-container {
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Welcome Section */
+  h1 {
+    color: #333;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 2.5rem;
+  }
+  
+  .customerhome-container > p {
+    text-align: center;
+    color: #666;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+  }
+  
+  /* Search Bar */
+  .search-bar {
+    display: block;
+    width: 50%;
+    max-width: 500px;
+    margin: 0 auto 30px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+  }
+  
+  .search-bar:focus {
+    border-color: #4CAF50;
+    outline: none;
+  }
+  
+  /* Paintings Container */
+  .paintings-container {
+    margin-bottom: 40px;
+  }
+  
+  .paintings-container > p {
+    text-align: center;
+    color: #666;
+    font-size: 1.1rem;
+  }
+  
+  /* Horizontal Scroll for Paintings */
+  .paintings-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 20px 0;
+    scrollbar-width: thin;
+    scrollbar-color: #4CAF50 #f5f5f5;
+  }
+  
+  .paintings-scroll::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .paintings-scroll::-webkit-scrollbar-track {
+    background: #f5f5f5;
+  }
+  
+  .paintings-scroll::-webkit-scrollbar-thumb {
+    background: #4CAF50;
+    border-radius: 4px;
+  }
+  
+  .painting-card {
+    flex: 0 0 300px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+  
+  .painting-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .painting-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .painting-card h3 {
+    color: #333;
+    margin: 10px 0;
+    font-size: 1.2rem;
+  }
+  
+  .painting-card p {
+    margin: 5px 0;
+    color: #666;
+    text-align: left;
+  }
+  
+  .painting-card button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .painting-card button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Request Container */
+  .request-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 40px;
+  }
+  
+  .request-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #444;
+    font-weight: 600;
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: #4CAF50;
+    outline: none;
+  }
+  
+  .request-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .request-container button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Requests Container */
+  .requests-container {
+    width: 100%;
+  }
+  
+  .requests-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .requests-container > p {
+    text-align: center;
+    color: #666;
+    font-size: 1.1rem;
+  }
+  
+  /* Horizontal Scroll for Requests */
+  .requests-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 20px 0;
+    scrollbar-width: thin;
+    scrollbar-color: #4CAF50 #f5f5f5;
+  }
+  
+  .requests-scroll::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .requests-scroll::-webkit-scrollbar-track {
+    background: #f5f5f5;
+  }
+  
+  .requests-scroll::-webkit-scrollbar-thumb {
+    background: #4CAF50;
+    border-radius: 4px;
+  }
+  
+  .request-card {
+    flex: 0 0 300px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+  
+  .request-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .request-card p {
+    margin: 10px 0;
+    color: #666;
+    text-align: left;
+  }
+  
+  .request-card p strong {
+    color: #333;
+  }
+  
+  .request-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin: 10px 0;
+  }
+  
+  /* View Orders Button */
+  .view-orders-button {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 12px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .view-orders-button:hover {
+    background-color: #1976D2;
+  }

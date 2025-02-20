@@ -1,164 +1,278 @@
-body {
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #f8e1f4, #fde2e4);
-  color: #333;
-  margin: 0;
-  padding: 0;
+/* General Container */
+.artisthome-container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
-/* Overall Container */
-.artisthome-container {
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 15px 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  height: 50px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.nav-links {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.nav-button:hover {
+  background-color: #45a049;
+}
+
+/* Welcome Section */
+h1 {
+  color: #333;
+  text-align: center;
+  margin: 20px 0;
+  font-size: 2.5rem;
+}
+
+.artisthome-container > p {
+  text-align: center;
+  color: #666;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+/* Content Wrapper */
+.content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 50px 20px;
-  text-align: center;
-}
-
-/* Welcome Message */
-.artisthome-container h1 {
-  font-family: 'Georgia', serif;
-  color: #4b2e83;
-  font-size: 2.8em;
-  margin-bottom: 10px;
-}
-
-.artisthome-container p {
-  color: #5c5470;
-  max-width: 800px;
-  line-height: 1.6;
-  margin-bottom: 30px;
+  gap: 40px;
 }
 
 /* Upload Form Container */
 .upload-form-container {
-  background: #fff;
+  background-color: white;
   padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 500px;
-  box-sizing: border-box;
+  margin: 0 auto;
 }
 
 .upload-form-container h2 {
-  font-family: 'Georgia', serif;
-  color: #4b2e83;
+  color: #333;
   margin-bottom: 20px;
+  text-align: center;
 }
 
-/* Form Groups */
 .form-group {
-  text-align: left;
   margin-bottom: 20px;
 }
 
 .form-group label {
   display: block;
+  margin-bottom: 8px;
   color: #444;
-  margin-bottom: 5px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
-.form-group input[type="text"],
-.form-group input[type="number"],
-.form-group input[type="file"] {
+.form-group input {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  box-sizing: border-box;
+  font-size: 16px;
+  transition: border-color 0.3s;
 }
 
-.form-group input[type="text"]:focus,
-.form-group input[type="number"]:focus,
-.form-group input[type="file"]:focus {
-  border-color: #c73866;
+.form-group input:focus {
+  border-color: #4CAF50;
   outline: none;
-  box-shadow: 0 0 5px rgba(199, 56, 102, 0.5);
 }
 
-/* Submit Button */
-button[type="submit"] {
-  background: linear-gradient(45deg, #6a0572, #c73866);
-  color: #fff;
+.upload-form-container button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4CAF50;
+  color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 25px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s;
-  font-size: 1em;
-  width: 100%;
-  margin-top: 10px;
+  font-size: 16px;
+  transition: background-color 0.3s;
 }
 
-button[type="submit"]:hover {
-  background: linear-gradient(45deg, #c73866, #6a0572);
+.upload-form-container button:hover {
+  background-color: #45a049;
 }
 
-/* Paintings Container */
-.paintings-container {
-  margin-top: 40px;
-  width: 100%;
-  max-width: 900px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-.paintings-container h2 {
-  font-family: 'Georgia', serif;
-  color: #4b2e83;
-  margin-bottom: 20px;
-  width: 100%;
+.message {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 5px;
   text-align: center;
 }
 
-.painting-card {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  text-align: left;
-  padding: 15px;
-  transition: transform 0.3s;
-  width: calc(100% / 3 - 40px); /* 3 cards per row */
-  box-sizing: border-box;
+.message.success {
+  background-color: #dff0d8;
+  color: #3c763d;
 }
 
-.painting-card:hover {
+.message.error {
+  background-color: #f2dede;
+  color: #a94442;
+}
+
+/* Custom Requests Container */
+.custom-requests-container {
+  width: 100%;
+}
+
+.custom-requests-container h2 {
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.custom-requests-container > p {
+  text-align: center;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* Horizontal Scroll Container */
+.custom-requests-container .requests-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 20px 0;
+  scrollbar-width: thin;
+  scrollbar-color: #4CAF50 #f5f5f5;
+}
+
+.custom-requests-container .requests-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.custom-requests-container .requests-scroll::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+.custom-requests-container .requests-scroll::-webkit-scrollbar-thumb {
+  background: #4CAF50;
+  border-radius: 4px;
+}
+
+.request-card {
+  flex: 0 0 300px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.request-card:hover {
   transform: translateY(-5px);
 }
 
-.painting-card img {
+.request-card p {
+  margin: 10px 0;
+  color: #666;
+  text-align: left;
+}
+
+.request-card p strong {
+  color: #333;
+}
+
+.request-image {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 15px;
+  border-radius: 5px;
+  margin: 10px 0;
 }
 
-.painting-card h3 {
-  color: #4b2e83;
-  font-size: 1.4em;
-  margin: 0;
+.request-card button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.painting-card p {
-  color: #5c5470;
-  margin: 5px 0;
+.request-card button:hover {
+  background-color: #45a049;
+}
+/* Add this to the existing .request-card section */
+.request-card {
+  /* ... existing styles ... */
+  display: flex;
+  flex-direction: column;
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .painting-card {
-    width: calc(100% / 2 - 30px); /* 2 cards per row */
-  }
+/* Button group for accept and download buttons */
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-@media (max-width: 600px) {
-  .painting-card {
-    width: 100%; /* 1 card per row */
-  }
+.accept-button {
+  flex: 1;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.accept-button:hover {
+  background-color: #45a049;
+}
+
+.download-button {
+  flex: 1;
+  padding: 10px;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.download-button:hover {
+  background-color: #1976D2;
 }

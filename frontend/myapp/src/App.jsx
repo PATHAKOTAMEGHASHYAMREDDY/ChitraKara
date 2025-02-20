@@ -7,6 +7,8 @@ import Artisthome from "./pages/artisthome.jsx";
 import Customerhome from "./pages/customerhome.jsx";
 import Artistpaintings from "./pages/artistpaintings.jsx";
 import ArtistOrders from "./pages/ArtistOrders.jsx";
+import CustomerOrders from "./pages/CustomerOrders.jsx";
+// import CustomerPaintings from "./pages/CustomerPaintings.jsx";
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +20,8 @@ function App() {
         <Route path="/customerhome" element={<Customerhome />} />
         <Route path="/artistpaintings" element={<Artistpaintings />} />
         <Route path="/artistorders" element={<ArtistOrders/>} />
+        <Route path="/customerorders" element={<CustomerOrders />} />
+        {/* <Route path="/customerpaintings" element={<CustomerPaintings />} /> */}
       </Routes>
     </BrowserRouter>
   );

@@ -1,176 +1,277 @@
-/* General Container */
+/* artistlog.css */
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
 .artistlog-container {
-  margin-top: 5px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5e8d3 0%, #e0f7fa 100%);
+  color: #333;
+  padding: 40px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/* Artist Introduction Section */
+.artist-intro {
   text-align: center;
-  font-family: "Poppins", sans-serif;
-  padding: 20px;
-  background-color: #E0F2F1; /* Soft Teal Background */
-  min-height: 100vh;
+  padding: 40px 20px;
+  max-width: 800px;
+  margin-bottom: 60px;
+}
+
+.artist-title {
+  font-size: 3.5rem;
+  font-family: 'Brush Script MT', cursive;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.artist-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.artist-highlight {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #e67e22;
+}
+
+/* Forms Wrapper for Side-by-Side Layout */
+.forms-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  width: 100%;
 }
 
 /* Form Container */
 .form-container {
-  background: white;
+  background: #fff;
   padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-  width: 90%;
-  max-width: 400px;
-  margin: 20px auto;
-  text-align: center;
-  transition: transform 0.3s ease-in-out;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 450px;
+  transition: transform 0.3s ease;
 }
 
 .form-container:hover {
-  transform: translateY(-5px);
+  transform: scale(1.03);
 }
 
-/* Form Titles */
 .form-title {
-  font-size: 22px;
-  color: #004D40; /* Deep Teal */
-  margin-bottom: 15px;
-  font-weight: 600;
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-/* Form Fields */
+/* Form Styles */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .form-group {
-  margin-bottom: 15px;
-  text-align: left;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-label {
-  display: block;
-  font-size: 14px;
-  font-weight: 500;
-  color: #00796B;
+  font-size: 1.1rem;
+  color: #2c3e50;
   margin-bottom: 5px;
 }
 
 .form-input {
-  width: 100%;
   padding: 12px;
-  border: 1px solid #B2DFDB;
-  border-radius: 8px;
-  font-size: 16px;
-  transition: border-color 0.3s ease;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-input:focus {
-  border-color: #00796B;
   outline: none;
+  border-color: #e67e22;
+  box-shadow: 0 0 8px rgba(230, 126, 34, 0.3);
 }
 
-/* Buttons */
+/* Button Styles */
 .form-button {
-  background-color: #00897B;
-  color: white;
-  padding: 12px 18px;
+  padding: 12px;
+  font-size: 1.1rem;
+  background: #e67e22;
+  color: #fff;
   border: none;
-  font-size: 16px;
-  border-radius: 8px;
+  border-radius: 25px;
   cursor: pointer;
-  transition: 0.3s ease;
-  width: 100%;
-  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .form-button:hover {
-  background-color: #00695C;
+  background: #d35400;
+  transform: translateY(-2px);
 }
 
-/* Scroll Icons */
+/* Message Styles with Animation */
+.message {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 1rem;
+  animation: slideIn 0.5s ease forwards;
+}
+
+.message.success {
+  background: #dff0d8;
+  color: #3c763d;
+  border: 1px solid #d6e9c6;
+}
+
+.message.error {
+  background: #f2dede;
+  color: #a94442;
+  border: 1px solid #ebccd1;
+}
+
+/* Keyframe Animation */
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scroll Icons and Text */
+.scroll-text {
+  font-size: 1rem;
+  color: #666;
+  text-align: center;
+  margin-top: 15px;
+}
+
 .scroll-down,
 .scroll-up {
-  margin-top: 15px;
-  cursor: pointer;
-  animation: bounce 1.5s infinite;
   display: flex;
   justify-content: center;
-  align-items: center;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: transform 0.3s ease;
 }
 
 .scroll-down:hover,
 .scroll-up:hover {
-  transform: scale(1.1);
-  transition: 0.3s;
-}
-
-/* Bounce Animation */
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(8px);
-  }
+  transform: scale(1.2);
 }
 
 /* Home Button */
-button {
-  margin-top: 20px;
-  background-color: #004D40;
-  color: white;
-  padding: 10px 20px;
-  font-size: 16px;
+.artistlog-container > button {
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  background: #3498db;
+  color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 25px;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
+  margin-top: 40px;
 }
 
-button:hover {
-  background-color: #002D27;
+.artistlog-container > button:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
 }
 
-/* Responsive Design */
+/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
+  .artist-title {
+    font-size: 2.5rem;
+  }
+
+  .artist-description {
+    font-size: 1rem;
+  }
+
+  .forms-wrapper {
+    flex-direction: column;
+    gap: 20px;
+  }
+
   .form-container {
-    width: 95%;
     padding: 20px;
+    max-width: 100%;
+  }
+
+  .form-title {
+    font-size: 1.8rem;
   }
 
   .form-input {
-    font-size: 14px;
-    padding: 10px;
+    font-size: 0.9rem;
   }
 
   .form-button {
-    font-size: 14px;
+    font-size: 1rem;
+    padding: 10px;
   }
 }
-/* 🌟 Artist Introduction Section Styles */
-.artist-intro {
 
-  background: rgba(255, 255, 255, 0.9); /* Light background with slight transparency */
-  padding: 20px;
-  border-radius: 12px; /* Rounded corners */
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Soft shadow effect */
-  text-align: center;
-  margin: 0px auto; /* Centering the section */
-  max-width: 100%; /* Restrict width for a clean look */
-  
-}
+@media (max-width: 480px) {
+  .artist-title {
+    font-size: 2rem;
+  }
 
-.artist-title {
-  font-size: 28px;
-  font-weight: bold;
-  color: rgb(0, 38, 255); /* Dark gray for contrast */
-  margin-bottom: 10px;
-}
+  .artist-intro {
+    padding: 20px 15px;
+  }
 
-.artist-description {
-  font-size: 16px;
-  color: #555; /* Softer gray for text */
-  line-height: 1.6;
-}
+  .form-container {
+    padding: 15px;
+  }
 
-.artist-highlight {
-  font-size: 18px;
-  font-weight: bold;
-  color: #00897B; /* Highlight color */
-  margin-top: 10px;
+  .form-title {
+    font-size: 1.5rem;
+  }
+
+  .form-label {
+    font-size: 1rem;
+  }
+
+  .form-input {
+    padding: 8px;
+  }
+
+  .form-button {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .artistlog-container > button {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+
+  .message {
+    font-size: 0.9rem;
+  }
 }
