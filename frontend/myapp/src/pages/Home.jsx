@@ -2,16 +2,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Home.css";
 import logo from "../assets/logo.png"; // Adjust the path as needed
-import sliderImage1 from "../assets/slider1.jpg"; // Add your slider images
-import sliderImage2 from "../assets/slider2.jpg";
-import sliderImage3 from "../assets/slider3.jpg";
-import sliderImage4 from "../assets/slider4.jpg";
-import sliderImage5 from "../assets/slider5.jpg";
-import sliderImage6 from "../assets/slider6.jpg";
-import sliderImage7 from "../assets/slider7.jpg";
-import sliderImage8 from "../assets/slider8.jpg";
-import sliderImage9 from "../assets/slider9.jpg";
-import sliderImage10 from "../assets/slider10.jpg";
 import { FaLinkedin } from "react-icons/fa"; // Social media icons
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 
