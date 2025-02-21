@@ -35,7 +35,7 @@ function Customerlog() {
     e.preventDefault();
     setIsSignupLoading(true);
     try {
-      const response = await axios.post("http://localhost:5000/api/customersignup", {
+      const response = await axios.post("https://chitra-kara-api.vercel.app/api/customersignup", {
         cname: signupName,
         cemail: signupEmail,
         cpassword: signupPassword,
@@ -58,7 +58,7 @@ function Customerlog() {
     e.preventDefault();
     setIsLoginLoading(true);
     try {
-      const response = await axios.post("http://localhost:5000/api/customerlogin", {
+      const response = await axios.post("https://chitra-kara-api.vercel.app/api/customerlogin", {
         cemail: loginEmail,
         cpassword: loginPassword,
       });

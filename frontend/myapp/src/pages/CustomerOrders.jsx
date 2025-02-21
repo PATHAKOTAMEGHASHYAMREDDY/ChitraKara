@@ -20,7 +20,7 @@ function CustomerOrders() {
 
       try {
         setLoading(true);
-        const response = await axios.get(`http://localhost:5000/api/customerorders/${username}`);
+        const response = await axios.get(`https://chitra-kara-api.vercel.app/api/customerorders/${username}`);
         setOrders(response.data || []); // Ensure orders is always an array
         setError(null);
       } catch (error) {

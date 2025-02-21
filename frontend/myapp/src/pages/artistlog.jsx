@@ -35,7 +35,7 @@ function Artistlog() {
     e.preventDefault();
     setIsLoginLoading(true);
     try {
-      const response = await axios.post("http://localhost:5000/api/artistlogin", {
+      const response = await axios.post("https://chitra-kara-api.vercel.app/api/artistlogin", {
         semail: loginEmail,
         spassword: loginPassword,
       });
@@ -57,7 +57,7 @@ function Artistlog() {
     e.preventDefault();
     setIsSignupLoading(true);
     try {
-      const response = await axios.post("http://localhost:5000/api/artistsignup", {
+      const response = await axios.post("https://chitra-kara-api.vercel.app/api/artistsignup", {
         sname,
         semail: signupEmail,
         spassword: signupPassword,

@@ -30,8 +30,8 @@ function CustomerHome() {
     try {
       setLoading(true);
       const [paintingsResponse, artistsResponse] = await Promise.all([
-        axios.get("http://localhost:5000/api/paintings"),
-        axios.get("http://localhost:5000/api/artists"),
+        axios.get("https://chitra-kara-api.vercel.app/api/paintings"),
+        axios.get("https://chitra-kara-api.vercel.app/api/artists"),
       ]);
       setPaintings(paintingsResponse.data || []);
       setArtists(artistsResponse.data || []);
@@ -45,7 +45,7 @@ function CustomerHome() {
   const fetchCustomerRequests = async () => {
     try {
       const email = location.state?.email || `${username}@example.com`;
-      const requestsResponse = await axios.get(`http://localhost:5000/api/myrequests/${email}`);
+      const requestsResponse = await axios.get(`https://chitra-kara-api.vercel.app/api/myrequests/${email}`);
       setCustomerRequests(requestsResponse.data || []);
     } catch (error) {
       console.error("Error fetching customer requests:", error);
@@ -83,7 +83,7 @@ function CustomerHome() {
         customerAddress: orderDetails.address,
         customerPhone: orderDetails.phone,
       };
-      await axios.post("http://localhost:5000/api/order", orderData);
+      await axios.post("https://chitra-kara-api.vercel.app/api/order", orderData);
       alert(`Order placed for ${selectedPainting.title}!`);
       setShowOrderPopup(false);
       setOrderDetails({ name: username || "", address: "", phone: "" });
@@ -107,7 +107,7 @@ function CustomerHome() {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/custompaintingrequest",
+        "https://chitra-kara-api.vercel.app/api/custompaintingrequest",
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
