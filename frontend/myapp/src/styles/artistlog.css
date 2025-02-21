@@ -1,85 +1,85 @@
 /* artistlog.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-/* Global Styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .artistlog-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5e8d3 0%, #e0f7fa 100%);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   color: #333;
   padding: 40px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  position: relative;
 }
 
-/* Artist Introduction Section */
+/* Artist Intro Section */
 .artist-intro {
   text-align: center;
   padding: 40px 20px;
-  max-width: 800px;
-  margin-bottom: 60px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), transparent);
+  margin-bottom: 40px;
 }
 
 .artist-title {
-  font-size: 3.5rem;
-  font-family: 'Brush Script MT', cursive;
-  color: #2c3e50;
+  font-size: 2.8rem;
+  font-weight: 600;
+  color: #e74c3c;
   margin-bottom: 20px;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+  animation: fadeInDown 1s ease;
 }
 
 .artist-description {
   font-size: 1.2rem;
-  line-height: 1.6;
-  color: #666;
-  margin-bottom: 15px;
+  color: #7f8c8d;
+  max-width: 800px;
+  margin: 0 auto 20px;
+  animation: fadeInUp 1s ease 0.5s;
 }
 
 .artist-highlight {
   font-size: 1.1rem;
-  font-weight: bold;
-  color: #e67e22;
+  color: #2c3e50;
+  font-weight: 600;
+  animation: fadeIn 1s ease 1s;
 }
 
-/* Forms Wrapper for Side-by-Side Layout */
+/* Forms Wrapper */
 .forms-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   gap: 40px;
   flex-wrap: wrap;
-  max-width: 1200px;
-  width: 100%;
 }
 
-/* Form Container */
 .form-container {
   background: #fff;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 450px;
   transition: transform 0.3s ease;
+  width: 100%;
+  max-width: 500px; /* Ensures forms are balanced side-by-side */
 }
 
 .form-container:hover {
-  transform: scale(1.03);
+  transform: translateY(-5px);
 }
 
 .form-title {
   font-size: 2rem;
+  font-weight: 600;
   color: #2c3e50;
   margin-bottom: 20px;
   text-align: center;
 }
 
-/* Form Styles */
 .form {
   display: flex;
   flex-direction: column;
@@ -89,189 +89,220 @@
 .form-group {
   display: flex;
   flex-direction: column;
+  gap: 8px;
 }
 
 .form-label {
-  font-size: 1.1rem;
+  font-size: 1rem;
+  font-weight: 600;
   color: #2c3e50;
-  margin-bottom: 5px;
 }
 
 .form-input {
   padding: 12px;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 2px solid #dfe4ea;
   border-radius: 5px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+  transition: border-color 0.3s ease;
 }
 
 .form-input:focus {
-  outline: none;
-  border-color: #e67e22;
-  box-shadow: 0 0 8px rgba(230, 126, 34, 0.3);
+  border-color: #e74c3c;
 }
 
-/* Button Styles */
+.password-wrapper {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #7f8c8d;
+  transition: color 0.3s ease;
+}
+
+.password-toggle:hover {
+  color: #e74c3c;
+}
+
 .form-button {
   padding: 12px;
   font-size: 1.1rem;
-  background: #e67e22;
+  font-weight: 600;
+  background: #e74c3c;
   color: #fff;
   border: none;
   border-radius: 25px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, transform 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .form-button:hover {
-  background: #d35400;
-  transform: translateY(-2px);
+  background: #c0392b;
+  transform: translateY(-3px);
 }
 
-/* Message Styles with Animation */
+.form-button:disabled {
+  background: #95a5a6;
+  cursor: not-allowed;
+}
+
+/* Loader Animation */
+.loader {
+  width: 20px;
+  height: 20px;
+  border: 3px solid #fff;
+  border-top: 3px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
 .message {
   margin-top: 15px;
   padding: 10px;
   border-radius: 5px;
   text-align: center;
-  font-size: 1rem;
-  animation: slideIn 0.5s ease forwards;
+  font-size: 0.9rem;
 }
 
 .message.success {
-  background: #dff0d8;
-  color: #3c763d;
-  border: 1px solid #d6e9c6;
+  background: #2ecc71;
+  color: #fff;
 }
 
 .message.error {
-  background: #f2dede;
-  color: #a94442;
-  border: 1px solid #ebccd1;
-}
-
-/* Keyframe Animation */
-@keyframes slideIn {
-  0% {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Scroll Icons and Text */
-.scroll-text {
-  font-size: 1rem;
-  color: #666;
-  text-align: center;
-  margin-top: 15px;
-}
-
-.scroll-down,
-.scroll-up {
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: transform 0.3s ease;
-}
-
-.scroll-down:hover,
-.scroll-up:hover {
-  transform: scale(1.2);
+  background: #e74c3c;
+  color: #fff;
 }
 
 /* Home Button */
-.artistlog-container > button {
+.home-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
   padding: 12px 25px;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  font-weight: 600;
   background: #3498db;
   color: #fff;
   border: none;
   border-radius: 25px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 40px;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
-.artistlog-container > button:hover {
+.home-btn:hover {
   background: #2980b9;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
-/* Media Queries for Responsiveness */
+/* Keyframes */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Media Queries */
 @media (max-width: 768px) {
+  .forms-wrapper {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .form-container {
+    max-width: 100%;
+  }
+
   .artist-title {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
 
   .artist-description {
     font-size: 1rem;
   }
 
-  .forms-wrapper {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .form-container {
-    padding: 20px;
-    max-width: 100%;
-  }
-
   .form-title {
     font-size: 1.8rem;
   }
 
+  .form-container {
+    padding: 20px;
+  }
+
   .form-input {
-    font-size: 0.9rem;
+    padding: 10px;
   }
 
   .form-button {
-    font-size: 1rem;
     padding: 10px;
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
   .artist-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
-  .artist-intro {
-    padding: 20px 15px;
-  }
-
-  .form-container {
-    padding: 15px;
+  .artist-description {
+    font-size: 0.9rem;
   }
 
   .form-title {
     font-size: 1.5rem;
   }
 
-  .form-label {
-    font-size: 1rem;
+  .form-container {
+    padding: 15px;
   }
 
-  .form-input {
-    padding: 8px;
-  }
-
-  .form-button {
-    padding: 8px;
-    font-size: 0.9rem;
-  }
-
-  .artistlog-container > button {
-    padding: 8px 15px;
-    font-size: 0.9rem;
-  }
-
-  .message {
+  .home-btn {
+    padding: 10px 20px;
     font-size: 0.9rem;
   }
 }

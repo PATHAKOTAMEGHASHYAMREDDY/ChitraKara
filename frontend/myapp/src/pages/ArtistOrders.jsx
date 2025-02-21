@@ -7,6 +7,7 @@ function ArtistOrders() {
   const location = useLocation();
   const username = location.state?.username;
   const [orders, setOrders] = useState([]);
+
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -29,7 +30,9 @@ function ArtistOrders() {
             <h3>{order.paintingTitle}</h3>
             <p>Price: ₹{order.price}</p>
             <p>Ordered by: {order.customerName}</p>
-            <p>Contact: {order.contact}</p>
+            <p>Customer Address: {order.customerAddress}</p> {/* Display customer address */}
+            <p>Customer Phone: {order.customerPhone}</p>     {/* Display customer phone */}
+            <p>Artist Contact: {order.contact}</p>
           </div>
         ))
       ) : (

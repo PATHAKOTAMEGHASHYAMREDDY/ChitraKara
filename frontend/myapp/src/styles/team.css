@@ -1,0 +1,148 @@
+/* team.css */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.team-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: #333;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.team-container h1 {
+  font-size: 2.8rem;
+  font-weight: 600;
+  color: #2c3e50; /* Neutral dark color for general use */
+  margin-bottom: 40px;
+  animation: fadeInDown 1s ease;
+}
+
+.team-list {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.team-member {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-member:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.member-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.linkedin-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.linkedin-icon {
+  font-size: 2rem;
+  color: #3498db; /* Blue theme for consistency */
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.linkedin-link:hover .linkedin-icon {
+  color: #2980b9;
+  transform: scale(1.2);
+}
+
+/* Keyframes */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .team-container h1 {
+    font-size: 2.2rem;
+  }
+
+  .team-list {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .team-member {
+    padding: 15px;
+  }
+
+  .member-name {
+    font-size: 1.1rem;
+  }
+
+  .linkedin-icon {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .team-member {
+    padding: 10px;
+    flex-direction: column; /* Stack name and icon on mobile */
+    gap: 10px;
+  }
+
+  .member-name {
+    font-size: 1rem;
+  }
+
+  .linkedin-icon {
+    font-size: 1.6rem;
+  }
+}

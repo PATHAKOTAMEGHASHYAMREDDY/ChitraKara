@@ -1,85 +1,19 @@
-// import React from "react";
-// import { useNavigate } from "react-router-dom";
-// import "../styles/Home.css";
-// import logo from "../assets/logo.png"; // Adjust the path as needed
-
-// function Home() {
-//   const navigate = useNavigate();
-
-//   const handleArtist = () => {
-//     navigate("/artistlog");
-//   };
-
-//   const handleCustomer = () => {
-//     navigate("/customerlog");
-//   };
-
-//   return (
-//     <div className="home-container">
-//       {/* Logo Section */}
-//       <div className="logo-container">
-//         <img src={logo} alt="Chitrakara Logo" className="home-logo" />
-//       </div>
-
-//       {/* Buttons Section */}
-//       <div className="button-container">
-//         <button className="artist-btn" onClick={handleArtist}>
-//           I am an Artist
-//         </button>
-//         <button className="customer-btn" onClick={handleCustomer}>
-//           I am a Customer
-//         </button>
-//       </div>
-
-//       {/* Why Choose Us Section */}
-//       <section className="features-section">
-//         <h2 className="features-title">Why Choose Chitrakar?</h2>
-//         <div className="features">
-//           <div className="feature-card">
-//             <h3 className="feature-title">🎨 Showcase Your Art</h3>
-//             <p className="feature-description">
-//               Artists can upload their masterpieces and gain recognition.
-//             </p>
-//           </div>
-//           <div className="feature-card">
-//             <h3 className="feature-title">📤 Upload & Store</h3>
-//             <p className="feature-description">
-//               Customers can upload sketches securely to the cloud.
-//             </p>
-//           </div>
-//           <div className="feature-card">
-//             <h3 className="feature-title">🤝 Connect & Collaborate</h3>
-//             <p className="feature-description">
-//               Artists and customers can interact and bring creativity to life.
-//             </p>
-//           </div>
-//         </div>
-//       </section>
-
-//       {/* About Us Section */}
-//       <section className="about-section">
-//         <h2 className="about-title">About Us</h2>
-//         <p className="about-description">
-//           Chitrakar is a unique platform that bridges the gap between
-//           <strong> talented artists</strong> and
-//           <strong> passionate customers</strong>. Whether you are an artist
-//           looking to showcase your artwork or a customer searching for
-//           personalized sketches, we provide the perfect digital space for
-//           collaboration and inspiration.
-//         </p>
-//         <br></br>
-//         <p>For Enquiry contact +91 9392950661</p>
-//       </section>
-//     </div>
-//   );
-// }
-
-// export default Home;
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Home.css";
 import logo from "../assets/logo.png"; // Adjust the path as needed
-import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa"; // Social media icons
+import sliderImage1 from "../assets/slider1.jpg"; // Add your slider images
+import sliderImage2 from "../assets/slider2.jpg";
+import sliderImage3 from "../assets/slider3.jpg";
+import sliderImage4 from "../assets/slider4.jpg";
+import sliderImage5 from "../assets/slider5.jpg";
+import sliderImage6 from "../assets/slider6.jpg";
+import sliderImage7 from "../assets/slider7.jpg";
+import sliderImage8 from "../assets/slider8.jpg";
+import sliderImage9 from "../assets/slider9.jpg";
+import sliderImage10 from "../assets/slider10.jpg";
+import { FaLinkedin } from "react-icons/fa"; // Social media icons
+import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 
 function Home() {
   const navigate = useNavigate();
@@ -101,6 +35,8 @@ function Home() {
           <h1 className="site-title">Chitrakar</h1>
         </div>
       </header>
+
+      
 
       {/* Hero Section */}
       <section className="hero-section">
@@ -159,24 +95,16 @@ function Home() {
           sketches, we provide the perfect digital space for collaboration and
           inspiration.
         </p>
-        <div className="contact-info">
-          <p>For inquiries, contact us at: <strong>+91 9392950661</strong></p>
-          <p>Email: <a href="mailto:support@chitrakar.com">support@chitrakar.com</a></p>
-        </div>
         <div className="social-media">
-          <h3>Follow Us</h3>
+          <h3>Contact Us</h3>
           <div className="social-icons">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-              <FaFacebook className="social-icon" />
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-              <FaInstagram className="social-icon" />
-            </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-              <FaTwitter className="social-icon" />
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-              <FaLinkedin className="social-icon" />
+            <a target="_blank" rel="noopener noreferrer">
+              <FaLinkedin
+                className="social-icon"
+                onClick={() => {
+                  window.open("/team");
+                }}
+              />
             </a>
           </div>
         </div>
@@ -184,7 +112,7 @@ function Home() {
 
       {/* Footer */}
       <footer className="footer">
-        <p>&copy; 2025 Chitrakar. All rights reserved.</p>
+        <p>© 2025 Chitrakar. All rights reserved.</p>
       </footer>
     </div>
   );

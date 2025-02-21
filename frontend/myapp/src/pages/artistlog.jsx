@@ -1,184 +1,8 @@
-// import React, { useState, useRef } from "react";
-// import "../styles/artistlog.css";
-// import axios from "axios";
-// import { useNavigate } from "react-router-dom";
-// import { ArrowDown, ArrowUp } from "lucide-react"; // Importing icons
-
-// function Artistlog() {
-//   const navigate = useNavigate();
-
-//   // Login Form States
-//   const [loginEmail, setLoginEmail] = useState("");
-//   const [loginPassword, setLoginPassword] = useState("");
-
-//   // Signup Form States
-//   const [sname, setSignupName] = useState("");
-//   const [signupEmail, setSignupEmail] = useState("");
-//   const [signupPassword, setSignupPassword] = useState("");
-
-//   // Refs for scrolling
-//   const loginRef = useRef(null);
-//   const signupRef = useRef(null);
-
-//   // Smooth Scroll Function
-//   const scrollToSignup = () => {
-//     signupRef.current.scrollIntoView({ behavior: "smooth" });
-//   };
-
-//   const scrollToLogin = () => {
-//     loginRef.current.scrollIntoView({ behavior: "smooth" });
-//   };
-
-//   // Handle Login Submit
-//   const handleLoginSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const response = await axios.post("http://localhost:5000/api/artistlogin", {
-//         semail: loginEmail,
-//         spassword: loginPassword,
-//       });
-//       alert(response.data.message);
-//       setLoginEmail("");
-//       setLoginPassword("");
-//       navigate("/artisthome", { state: { username: response.data.username } });
-//     } catch (error) {
-//       alert(error.response?.data?.error || "Login Failed");
-//     }
-//   };
-
-//   // Handle Signup Submit
-//   const handleSignupSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const response = await axios.post("http://localhost:5000/api/artistsignup", {
-//         sname,
-//         semail: signupEmail,
-//         spassword: signupPassword,
-//       });
-//       alert(response.data.message);
-//       setSignupName("");
-//       setSignupEmail("");
-//       setSignupPassword("");
-//       scrollToLogin(); // Scrolls back to login after signup success
-//     } catch (error) {
-//       alert(error.response?.data?.error || "Signup Failed");
-//     }
-//   };
-
-//   return (
-//     <div className="artistlog-container">
-      
-//       {/* 🌟 Artist Introduction Section */}
-//       <div className="artist-intro">
-//         <h1 className="artist-title">Hey Chitrakar</h1>
-//         <p className="artist-description">
-//           🎨 **Chitrakar** is a platform for artists to showcase their talent, sell unique paintings, and connect with art lovers around the world.  
-//           Whether you are a passionate creator or an art enthusiast, join us in celebrating creativity and craftsmanship.  
-//         </p>
-//         <p className="artist-highlight">
-//           Join today and be part of a vibrant community where **art meets passion!**
-//         </p>
-//       </div>
-
-//       {/* Login Section */}
-//       <div className="form-container" ref={loginRef}>
-//         <h2 className="form-title">Login</h2>
-//         <form className="form" onSubmit={handleLoginSubmit}>
-//           <div className="form-group">
-//             <label className="form-label" htmlFor="login-email">Email</label>
-//             <input
-//               className="form-input"
-//               type="email"
-//               id="login-email"
-//               placeholder="Enter your email"
-//               value={loginEmail}
-//               onChange={(e) => setLoginEmail(e.target.value)}
-//               required
-//             />
-//           </div>
-//           <div className="form-group">
-//             <label className="form-label" htmlFor="login-password">Password</label>
-//             <input
-//               className="form-input"
-//               type="password"
-//               id="login-password"
-//               placeholder="Enter your password"
-//               value={loginPassword}
-//               onChange={(e) => setLoginPassword(e.target.value)}
-//               required
-//             />
-//           </div>
-//           <button className="form-button" type="submit">Login</button>
-//         </form>
-//         {/* Scroll Down Icon */}
-//         <br></br>
-//         <p>Click on arrow to Sign Up</p>
-//         <div className="scroll-down" onClick={scrollToSignup}>
-//           <ArrowDown size={30} color="#00897B" />
-//         </div>
-//       </div>
-
-//       {/* Signup Section */}
-//       <div className="form-container" ref={signupRef}>
-//         <h2 className="form-title">Sign Up</h2>
-//         <form className="form" onSubmit={handleSignupSubmit}>
-//           <div className="form-group">
-//             <label className="form-label" htmlFor="signup-name">Full Name</label>
-//             <input
-//               className="form-input"
-//               type="text"
-//               id="signup-name"
-//               placeholder="Enter your full name"
-//               value={sname}
-//               onChange={(e) => setSignupName(e.target.value)}
-//               required
-//             />
-//           </div>
-//           <div className="form-group">
-//             <label className="form-label" htmlFor="signup-email">Email</label>
-//             <input
-//               className="form-input"
-//               type="email"
-//               id="signup-email"
-//               placeholder="Enter your email"
-//               value={signupEmail}
-//               onChange={(e) => setSignupEmail(e.target.value)}
-//               required
-//             />
-//           </div>
-//           <div className="form-group">
-//             <label className="form-label" htmlFor="signup-password">Password</label>
-//             <input
-//               className="form-input"
-//               type="password"
-//               id="signup-password"
-//               placeholder="Enter your password"
-//               value={signupPassword}
-//               onChange={(e) => setSignupPassword(e.target.value)}
-//               required
-//             />
-//           </div>
-//           <button className="form-button" type="submit">Sign Up</button>
-//         </form>
-//         {/* Scroll Up Icon */}
-//         <br></br>
-//         <p>Existing user ? Login</p>
-//         <div className="scroll-up" onClick={scrollToLogin}>
-//           <ArrowUp size={30} color="#00897B" />
-//         </div>
-//       </div>
-
-//       <button onClick={() => navigate("/")}>Home</button>
-//     </div>
-//   );
-// }
-
-// export default Artistlog;
 import React, { useState, useRef } from "react";
 import "../styles/artistlog.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { ArrowDown, ArrowUp } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 
 function Artistlog() {
   const navigate = useNavigate();
@@ -187,24 +11,29 @@ function Artistlog() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [loginMessage, setLoginMessage] = useState({ text: "", type: "" });
+  const [showLoginPassword, setShowLoginPassword] = useState(false);
+  const [isLoginLoading, setIsLoginLoading] = useState(false);
 
   // Signup Form States
   const [sname, setSignupName] = useState("");
   const [signupEmail, setSignupEmail] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
   const [signupMessage, setSignupMessage] = useState({ text: "", type: "" });
+  const [showSignupPassword, setShowSignupPassword] = useState(false);
+  const [isSignupLoading, setIsSignupLoading] = useState(false);
 
-  // Refs for scrolling
+  // Refs for scrolling (optional, retained for potential use)
   const loginRef = useRef(null);
   const signupRef = useRef(null);
 
-  // Smooth Scroll Function
-  const scrollToSignup = () => signupRef.current.scrollIntoView({ behavior: "smooth" });
-  const scrollToLogin = () => loginRef.current.scrollIntoView({ behavior: "smooth" });
+  // Toggle Password Visibility
+  const toggleLoginPassword = () => setShowLoginPassword(!showLoginPassword);
+  const toggleSignupPassword = () => setShowSignupPassword(!showSignupPassword);
 
   // Handle Login Submit
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
+    setIsLoginLoading(true);
     try {
       const response = await axios.post("http://localhost:5000/api/artistlogin", {
         semail: loginEmail,
@@ -213,15 +42,20 @@ function Artistlog() {
       setLoginMessage({ text: response.data.message, type: "success" });
       setLoginEmail("");
       setLoginPassword("");
-      setTimeout(() => navigate("/artisthome", { state: { username: response.data.username } }), 1500);
+      setTimeout(() => {
+        setIsLoginLoading(false);
+        navigate("/artisthome", { state: { username: response.data.username } });
+      }, 1500);
     } catch (error) {
       setLoginMessage({ text: error.response?.data?.error || "Login Failed", type: "error" });
+      setIsLoginLoading(false);
     }
   };
 
   // Handle Signup Submit
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
+    setIsSignupLoading(true);
     try {
       const response = await axios.post("http://localhost:5000/api/artistsignup", {
         sname,
@@ -232,9 +66,12 @@ function Artistlog() {
       setSignupName("");
       setSignupEmail("");
       setSignupPassword("");
-      setTimeout(() => scrollToLogin(), 1500);
+      setTimeout(() => {
+        setIsSignupLoading(false);
+      }, 1500);
     } catch (error) {
       setSignupMessage({ text: error.response?.data?.error || "Signup Failed", type: "error" });
+      setIsSignupLoading(false);
     }
   };
 
@@ -244,11 +81,11 @@ function Artistlog() {
       <div className="artist-intro">
         <h1 className="artist-title">Hey Chitrakar</h1>
         <p className="artist-description">
-          🎨 **Chitrakar** is a platform for artists to showcase their talent, sell unique paintings, and connect with art lovers around the world.  
-          Whether you are a passionate creator or an art enthusiast, join us in celebrating creativity and craftsmanship.  
+          🎨 <strong>Chitrakar</strong> is a platform for artists to showcase their talent, sell unique paintings, and connect with art lovers worldwide.
+          Whether you're a passionate creator or an art enthusiast, join us in celebrating creativity and craftsmanship.
         </p>
         <p className="artist-highlight">
-          Join today and be part of a vibrant community where **art meets passion!**
+          Join today and be part of a vibrant community where <strong>art meets passion!</strong>
         </p>
       </div>
 
@@ -272,27 +109,28 @@ function Artistlog() {
             </div>
             <div className="form-group">
               <label className="form-label" htmlFor="login-password">Password</label>
-              <input
-                className="form-input"
-                type="password"
-                id="login-password"
-                placeholder="Enter your password"
-                value={loginPassword}
-                onChange={(e) => setLoginPassword(e.target.value)}
-                required
-              />
+              <div className="password-wrapper">
+                <input
+                  className="form-input"
+                  type={showLoginPassword ? "text" : "password"}
+                  id="login-password"
+                  placeholder="Enter your password"
+                  value={loginPassword}
+                  onChange={(e) => setLoginPassword(e.target.value)}
+                  required
+                />
+                <button type="button" className="password-toggle" onClick={toggleLoginPassword}>
+                  {showLoginPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+                </button>
+              </div>
             </div>
-            <button className="form-button" type="submit">Login</button>
+            <button className="form-button" type="submit" disabled={isLoginLoading}>
+              {isLoginLoading ? <span className="loader"></span> : "Login"}
+            </button>
           </form>
           {loginMessage.text && (
-            <div className={`message ${loginMessage.type}`}>
-              {loginMessage.text}
-            </div>
+            <div className={`message ${loginMessage.type}`}>{loginMessage.text}</div>
           )}
-          <p className="scroll-text">New here? Sign Up</p>
-          <div className="scroll-down" onClick={scrollToSignup}>
-            <ArrowDown size={30} color="#00897B" />
-          </div>
         </div>
 
         {/* Signup Section */}
@@ -325,31 +163,32 @@ function Artistlog() {
             </div>
             <div className="form-group">
               <label className="form-label" htmlFor="signup-password">Password</label>
-              <input
-                className="form-input"
-                type="password"
-                id="signup-password"
-                placeholder="Enter your password"
-                value={signupPassword}
-                onChange={(e) => setSignupPassword(e.target.value)}
-                required
-              />
+              <div className="password-wrapper">
+                <input
+                  className="form-input"
+                  type={showSignupPassword ? "text" : "password"}
+                  id="signup-password"
+                  placeholder="Enter your password"
+                  value={signupPassword}
+                  onChange={(e) => setSignupPassword(e.target.value)}
+                  required
+                />
+                <button type="button" className="password-toggle" onClick={toggleSignupPassword}>
+                  {showSignupPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+                </button>
+              </div>
             </div>
-            <button className="form-button" type="submit">Sign Up</button>
+            <button className="form-button" type="submit" disabled={isSignupLoading}>
+              {isSignupLoading ? <span className="loader"></span> : "Sign Up"}
+            </button>
           </form>
           {signupMessage.text && (
-            <div className={`message ${signupMessage.type}`}>
-              {signupMessage.text}
-            </div>
+            <div className={`message ${signupMessage.type}`}>{signupMessage.text}</div>
           )}
-          <p className="scroll-text">Existing user? Login</p>
-          <div className="scroll-up" onClick={scrollToLogin}>
-            <ArrowUp size={30} color="#00897B" />
-          </div>
         </div>
       </div>
 
-      <button onClick={() => navigate("/")}>Home</button>
+      <button className="home-btn" onClick={() => navigate("/")}>Home</button>
     </div>
   );
 }

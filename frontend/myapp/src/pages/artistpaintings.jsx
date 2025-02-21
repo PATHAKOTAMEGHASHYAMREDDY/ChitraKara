@@ -1,12 +1,14 @@
-import React from 'react'
+import React from 'react';
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from 'react-router-dom';
+import "../styles/artistspaintings.css";
 
 function Artistpaintings() {
     const location = useLocation();
     const username = location.state?.username;
     const [paintings, setPaintings] = useState([]);
+    const [deleteStatus, setDeleteStatus] = useState(null); // To track delete success/failure
 
     useEffect(() => {
         const fetchPaintings = async () => {
@@ -19,25 +21,30 @@ function Artistpaintings() {
         };
         fetchPaintings();
     }, [username]);
+
     const handleDelete = async (paintingId) => {
-      if (window.confirm("Are you sure you want to delete this painting?")) {
-          try {
-              await axios.delete(`http://localhost:5000/api/paintings/${paintingId}`, {
-                  params: { artist: username }
-              });
-              setPaintings(paintings.filter(painting => painting._id !== paintingId));
-              alert("Painting deleted successfully!");
-          } catch (error) {
-              console.error("Error deleting painting:", error);
-              alert("Failed to delete painting");
-          }
-      }
-  };
+        if (window.confirm("Are you sure you want to delete this painting?")) {
+            try {
+                await axios.delete(`http://localhost:5000/api/paintings/${paintingId}`, {
+                    params: { artist: username }
+                });
+                setPaintings(paintings.filter(painting => painting._id !== paintingId));
+                setDeleteStatus('success'); // Set success status
+                setTimeout(() => setDeleteStatus(null), 2000); // Reset after 2 seconds
+            } catch (error) {
+                console.error("Error deleting painting:", error);
+                setDeleteStatus('error'); // Set error status
+                setTimeout(() => setDeleteStatus(null), 2000); // Reset after 2 seconds
+            }
+        }
+    };
 
     return (
         <>
             <div className="paintings-container">
                 <h1>{username}'s Paintings</h1>
+                {deleteStatus === 'success' && <p className="status-message success">Painting deleted successfully!</p>}
+                {deleteStatus === 'error' && <p className="status-message error">Failed to delete painting!</p>}
                 {paintings.length > 0 ? (
                     paintings.map((painting) => (
                         <div key={painting._id} className="painting-card">
@@ -48,7 +55,6 @@ function Artistpaintings() {
                             <button 
                                 onClick={() => handleDelete(painting._id)}
                                 className="delete-button"
-                                style={{backgroundColor: 'red', color: 'white', padding: '5px 10px', border: 'none', cursor: 'pointer'}}
                             >
                                 Delete
                             </button>
@@ -59,7 +65,7 @@ function Artistpaintings() {
                 )}
             </div>
         </>
-    )
+    );
 }
 
 export default Artistpaintings;
