@@ -47,7 +47,7 @@
   padding: 10px 20px;
   font-size: 1rem;
   font-weight: 600;
-  background: #3498db; /* Blue theme for customers */
+  background: #3498db;
   color: #fff;
   border: none;
   border-radius: 25px;
@@ -314,7 +314,7 @@
   border-color: #3498db;
 }
 
-.request-container button {
+.request-container .submit-request-button {
   padding: 12px;
   font-size: 1.1rem;
   font-weight: 600;
@@ -324,11 +324,31 @@
   border-radius: 25px;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
-.request-container button:hover {
+.request-container .submit-request-button:hover:not(:disabled) {
   background: #2980b9;
   transform: translateY(-3px);
+}
+
+.request-container .submit-request-button:disabled {
+  background: #95a5a6;
+  cursor: not-allowed;
+}
+
+/* Spinner Animation */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid #fff;
+  border-top: 3px solid #3498db; /* Blue theme for spinner */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: inline-block;
 }
 
 /* Requests Container */
@@ -423,6 +443,15 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 
@@ -527,7 +556,7 @@
     padding: 10px;
   }
 
-  .request-container button {
+  .request-container .submit-request-button {
     padding: 10px;
     font-size: 1rem;
   }
