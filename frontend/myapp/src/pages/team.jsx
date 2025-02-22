@@ -23,7 +23,7 @@ function Team() {
       },
       {
         name: "R MANI KUMAR",
-        linkedin: "https://www.linkedin.com/in/alexjohnson",
+        linkedin: "https://www.linkedin.com/in/rajana-mani-kumar-2bbb59323/",
       },
 
   ];
