@@ -1,20 +1,3 @@
-// const express = require('express');
-// const dotenv = require('dotenv');
-// const authRoutes=require('./routes/auth');
-// const mongoose = require('mongoose');
-// const app = express();
-// dotenv.config();
-
-// const cors = require('cors');
-// app.use(cors());
-// app.use(express.json());
-// mongoose.connect(process.env.MOBGO_URI,{useNewUrlParser:true,useUnifiedTopology:true})
-//     .then(()=>console.log("MongoDB Connected"))
-//     .catch((error)=>console.log(error));
-// app.use("/api",authRoutes);
-// app.listen(process.env.PORT,()=>{
-//     console.log(`Server is running on port ${process.env.PORT}`);
-// })
 const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
