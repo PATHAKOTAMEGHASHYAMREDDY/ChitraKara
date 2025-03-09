@@ -2,7 +2,7 @@
 // import axios from "axios";
 // import { useLocation, useNavigate } from "react-router-dom";
 // import "../styles/customerhome.css";
-// import logo from "../assets/logo.png"; // Import the logo
+// import logo from "../assets/logo.png";
 
 // function CustomerHome() {
 //   const location = useLocation();
@@ -25,6 +25,7 @@
 //     phone: "",
 //   });
 //   const [selectedPainting, setSelectedPainting] = useState(null);
+//   const [isRequestLoading, setIsRequestLoading] = useState(false); // New loading state
 
 //   const fetchInitialData = async () => {
 //     try {
@@ -96,6 +97,7 @@
 
 //   const handleRequestSubmit = async (e) => {
 //     e.preventDefault();
+//     setIsRequestLoading(true); // Start loading
 //     const email = location.state?.email || `${username}@example.com`;
 //     const formData = new FormData();
 //     formData.append("name", requestName);
@@ -119,6 +121,8 @@
 //       setSelectedArtist("");
 //     } catch (error) {
 //       alert(error.response?.data?.error || "Request Failed");
+//     } finally {
+//       setIsRequestLoading(false); // Stop loading
 //     }
 //   };
 
@@ -278,7 +282,9 @@
 //               required
 //             />
 //           </div>
-//           <button type="submit">Submit Request</button>
+//           <button type="submit" disabled={isRequestLoading} className="submit-request-button">
+//             {isRequestLoading ? <span className="spinner"></span> : "Submit Request"}
+//           </button>
 //         </form>
 //       </div>
 
@@ -308,7 +314,6 @@
 // }
 
 // export default CustomerHome;
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -336,7 +341,8 @@ function CustomerHome() {
     phone: "",
   });
   const [selectedPainting, setSelectedPainting] = useState(null);
-  const [isRequestLoading, setIsRequestLoading] = useState(false); // New loading state
+  const [isRequestLoading, setIsRequestLoading] = useState(false);
+  const [isOrderLoading, setIsOrderLoading] = useState(false); // New loading state for orders
 
   const fetchInitialData = async () => {
     try {
@@ -384,6 +390,7 @@ function CustomerHome() {
 
   const handleOrderSubmit = async (e) => {
     e.preventDefault();
+    setIsOrderLoading(true); // Start loading
     try {
       const orderData = {
         customerName: orderDetails.name,
@@ -396,19 +403,21 @@ function CustomerHome() {
         customerPhone: orderDetails.phone,
       };
       await axios.post("https://chitra-kara-api.vercel.app/api/order", orderData);
-      alert(`Order placed for ${selectedPainting.title}!`);
+      alert(`Order placed for ${selectedPainting.title}! An email has been sent to ${selectedPainting.artist}.`);
       setShowOrderPopup(false);
       setOrderDetails({ name: username || "", address: "", phone: "" });
       setSelectedPainting(null);
     } catch (error) {
       console.error("Order failed:", error);
       alert("Failed to place order. Please try again.");
+    } finally {
+      setIsOrderLoading(false); // Stop loading
     }
   };
 
   const handleRequestSubmit = async (e) => {
     e.preventDefault();
-    setIsRequestLoading(true); // Start loading
+    setIsRequestLoading(true);
     const email = location.state?.email || `${username}@example.com`;
     const formData = new FormData();
     formData.append("name", requestName);
@@ -424,7 +433,7 @@ function CustomerHome() {
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
-      alert(response.data.message);
+      alert(`${response.data.message} An email has been sent to ${selectedArtist}.`);
       setCustomerRequests([...customerRequests, response.data.request]);
       setRequestAddress("");
       setRequestPhone("");
@@ -433,7 +442,7 @@ function CustomerHome() {
     } catch (error) {
       alert(error.response?.data?.error || "Request Failed");
     } finally {
-      setIsRequestLoading(false); // Stop loading
+      setIsRequestLoading(false);
     }
   };
 
@@ -520,7 +529,9 @@ function CustomerHome() {
                   required
                 />
               </div>
-              <button type="submit">Confirm Order</button>
+              <button type="submit" disabled={isOrderLoading}>
+                {isOrderLoading ? <span className="spinner"></span> : "Confirm Order"}
+              </button>
               <button
                 type="button"
                 onClick={() => setShowOrderPopup(false)}
