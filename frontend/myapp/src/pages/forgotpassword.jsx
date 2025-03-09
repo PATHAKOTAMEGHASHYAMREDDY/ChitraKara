@@ -11,8 +11,8 @@ function ForgotPassword() {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false); // State for new password visibility
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // State for confirm password visibility
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleSendOTP = async (e) => {
     e.preventDefault();
@@ -50,10 +50,14 @@ function ForgotPassword() {
       });
       setMessage(response.data.message);
       setError('');
-      // Optional: Reset form or redirect after success
+      // Reset form and return to step 1 after success
       setOtp('');
       setNewPassword('');
       setConfirmPassword('');
+      setTimeout(() => {
+        setStep(1);
+        setMessage('');
+      }, 2000); // Show success message for 2 seconds before resetting
     } catch (err) {
       setError(err.response?.data?.error || 'Something went wrong');
       setMessage('');

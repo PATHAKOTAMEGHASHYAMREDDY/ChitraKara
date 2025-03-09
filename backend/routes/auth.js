@@ -281,11 +281,11 @@ const multer = require("multer");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const cloudinary = require("cloudinary").v2;
 const Painting = require("../models/painting");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs"); // Standardized to bcryptjs
 const Order = require("../models/orders");
 const CustomPaintingRequest = require("../models/custompaintingrequest");
-const nodemailer = require('nodemailer');
-const crypto = require('crypto');
+const nodemailer = require("nodemailer");
+const crypto = require("crypto");
 
 // Cloudinary Configuration
 cloudinary.config({
@@ -294,7 +294,7 @@ cloudinary.config({
   api_secret: "r9kUS7Ty_XI-b1D2OQq23vJS9jk",
 });
 
-// Storage setups
+// Storage setups for Cloudinary
 const paintingStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: { folder: "chitrakara-paintings", allowedFormats: ["jpg", "jpeg", "png"] },
@@ -310,11 +310,11 @@ const requestUpload = multer({ storage: requestStorage });
 
 // Configure Nodemailer transporter
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: "gmail",
   auth: {
-    user: process.env.EMAIL_USER || 'meghashyamreddy014@gmail.com',
-    pass: process.env.EMAIL_PASS || 'amfs nznb wsbg snna'
-  }
+    user: process.env.EMAIL_USER || "meghashyamreddy014@gmail.com",
+    pass: process.env.EMAIL_PASS || "amfs nznb wsbg snna",
+  },
 });
 
 // Artist Signup Route
@@ -351,33 +351,54 @@ router.post("/artistlogin", async (req, res) => {
   }
 });
 
+// Customer Signup Route
+router.post("/customersignup", async (req, res) => {
+  try {
+    const { cname, cemail, cpassword } = req.body;
+    const existingCustomer = await Customer.findOne({ cemail });
+    if (existingCustomer) return res.status(400).json({ error: "Email already registered" });
+    const customer = new Customer({ cname, cemail, cpassword });
+    await customer.save();
+    res.status(201).json({ message: "Customer Signup Successful" });
+  } catch (error) {
+    console.error("Signup Error:", error);
+    res.status(500).json({ error: "Customer Signup Failed" });
+  }
+});
+
+// Customer Login Route
+router.post("/customerlogin", async (req, res) => {
+  try {
+    const { cemail, cpassword } = req.body;
+    const customer = await Customer.findOne({ cemail });
+    if (!customer || !(await customer.matchPassword(cpassword))) {
+      return res.status(400).json({ error: "Invalid email or password" });
+    }
+    res.status(200).json({ message: "Customer Login Successful", username: customer.cname, email: cemail });
+  } catch (error) {
+    console.error("Login Error:", error);
+    res.status(500).json({ error: "Customer Login Failed" });
+  }
+});
+
 // Order Route
 router.post("/order", async (req, res) => {
   try {
-    const { 
-      customerName, 
-      artistName, 
-      paintingTitle, 
-      price, 
-      contact, 
-      imageUrl, 
-      customerAddress, 
-      customerPhone 
-    } = req.body;
+    const { customerName, artistName, paintingTitle, price, contact, imageUrl, customerAddress, customerPhone } = req.body;
 
     if (!customerName || !artistName || !paintingTitle || !price || !contact || !imageUrl || !customerAddress || !customerPhone) {
       return res.status(400).json({ error: "All fields are required" });
     }
 
-    const order = new Order({ 
-      customerName, 
-      artistName, 
-      paintingTitle, 
-      price, 
-      contact, 
-      imageUrl, 
-      customerAddress, 
-      customerPhone 
+    const order = new Order({
+      customerName,
+      artistName,
+      paintingTitle,
+      price,
+      contact,
+      imageUrl,
+      customerAddress,
+      customerPhone,
     });
     await order.save();
     res.status(201).json({ message: "Order placed successfully!" });
@@ -406,36 +427,6 @@ router.get("/customerorders/:customerName", async (req, res) => {
   } catch (error) {
     console.error("Error fetching customer orders:", error);
     res.status(500).json({ error: "Failed to fetch your orders" });
-  }
-});
-
-// Customer Signup Route
-router.post("/customersignup", async (req, res) => {
-  try {
-    const { cname, cemail, cpassword } = req.body;
-    const existingCustomer = await Customer.findOne({ cemail });
-    if (existingCustomer) return res.status(400).json({ error: "Email already registered" });
-    const customer = new Customer({ cname, cemail, cpassword });
-    await customer.save();
-    res.status(201).json({ message: "Customer Signup Successful" });
-  } catch (error) {
-    console.error("Signup Error:", error);
-    res.status(500).json({ error: "Customer Signup Failed" });
-  }
-});
-
-// Customer Login Route
-router.post("/customerlogin", async (req, res) => {
-  try {
-    const { cemail, cpassword } = req.body;
-    const customer = await Customer.findOne({ cemail });
-    if (!customer || !(await customer.matchPassword(cpassword))) {
-      return res.status(400).json({ error: "Invalid email or password" });
-    }
-    res.status(200).json({ message: "Customer Login Successful", username: customer.cname, email: cemail });
-  } catch (error) {
-    console.error("Login Error:", error);
-    res.status(500).json({ error: "Customer Login Failed" });
   }
 });
 
@@ -545,7 +536,7 @@ router.delete("/paintings/:paintingId", async (req, res) => {
     if (!painting) {
       return res.status(404).json({ error: "Painting not found" });
     }
-    const publicId = painting.imageUrl.split('/').pop().split('.')[0];
+    const publicId = painting.imageUrl.split("/").pop().split(".")[0];
     await cloudinary.uploader.destroy(`chitrakara-paintings/${publicId}`);
     await Painting.findByIdAndDelete(paintingId);
     res.status(200).json({ message: "Painting deleted successfully" });
@@ -556,25 +547,24 @@ router.delete("/paintings/:paintingId", async (req, res) => {
 });
 
 // Forgot Password - Generate and Send OTP
-router.post('/forgot-password', async (req, res) => {
+router.post("/forgot-password", async (req, res) => {
   try {
     const { email, userType } = req.body;
-    
     if (!email || !userType) {
-      return res.status(400).json({ error: 'Email and user type are required' });
+      return res.status(400).json({ error: "Email and user type are required" });
     }
 
     let user;
-    if (userType === 'artist') {
+    if (userType === "artist") {
       user = await Artist.findOne({ semail: email });
-    } else if (userType === 'customer') {
+    } else if (userType === "customer") {
       user = await Customer.findOne({ cemail: email });
     } else {
-      return res.status(400).json({ error: 'Invalid user type' });
+      return res.status(400).json({ error: "Invalid user type" });
     }
 
     if (!user) {
-      return res.status(404).json({ error: 'Email not found' });
+      return res.status(404).json({ error: "Email not found" });
     }
 
     const otp = crypto.randomInt(100000, 999999).toString();
@@ -585,66 +575,71 @@ router.post('/forgot-password', async (req, res) => {
     await user.save();
 
     const mailOptions = {
-      from: process.env.EMAIL_USER || 'your-email@gmail.com',
+      from: process.env.EMAIL_USER || "meghashyamreddy014@gmail.com",
       to: email,
-      subject: 'Password Reset OTP',
-      text: `Your OTP for password reset is: ${otp}. It will expire in 10 minutes.`
+      subject: "Password Reset OTP",
+      text: `Your OTP for password reset is: ${otp}. It will expire in 10 minutes.`,
     };
 
     await transporter.sendMail(mailOptions);
-    res.status(200).json({ message: 'OTP sent to your email' });
+    res.status(200).json({ message: "OTP sent to your email" });
   } catch (error) {
-    console.error('Forgot Password Error:', error);
-    res.status(500).json({ error: 'Failed to process password reset request' });
+    console.error("Forgot Password Error:", error);
+    res.status(500).json({ error: "Failed to process password reset request" });
   }
 });
 
-// Verify OTP and Reset Password
-router.post('/reset-password', async (req, res) => {
+// Reset Password - Avoid pre.save hook
+router.post("/reset-password", async (req, res) => {
   try {
     const { email, userType, otp, newPassword } = req.body;
     if (!email || !userType || !otp || !newPassword) {
-      return res.status(400).json({ error: 'All fields are required' });
+      return res.status(400).json({ error: "All fields are required" });
     }
 
     const submittedOtp = String(otp);
-    let user;
+    let Model;
+    let emailField;
     let passwordField;
 
-    if (userType === 'artist') {
-      user = await Artist.findOne({ 
-        semail: email,
-        resetPasswordOTP: submittedOtp,
-        resetPasswordExpires: { $gt: Date.now() }
-      });
-      passwordField = 'spassword';
-    } else if (userType === 'customer') {
-      user = await Customer.findOne({ 
-        cemail: email,
-        resetPasswordOTP: submittedOtp,
-        resetPasswordExpires: { $gt: Date.now() }
-      });
-      passwordField = 'cpassword';
+    if (userType === "artist") {
+      Model = Artist;
+      emailField = "semail";
+      passwordField = "spassword";
+    } else if (userType === "customer") {
+      Model = Customer;
+      emailField = "cemail";
+      passwordField = "cpassword";
     } else {
-      return res.status(400).json({ error: 'Invalid user type' });
+      return res.status(400).json({ error: "Invalid user type" });
     }
 
+    const user = await Model.findOne({
+      [emailField]: email,
+      resetPasswordOTP: submittedOtp,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
+
     if (!user) {
-      return res.status(400).json({ error: 'Invalid or expired OTP' });
+      return res.status(400).json({ error: "Invalid or expired OTP" });
     }
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(newPassword, salt);
 
-    user[passwordField] = hashedPassword; // Updates the password in MongoDB
-    user.resetPasswordOTP = undefined;
-    user.resetPasswordExpires = undefined;
-    await user.save(); // Saves the updated document to MongoDB
+    // Update password directly without triggering pre.save
+    await Model.updateOne(
+      { _id: user._id },
+      {
+        $set: { [passwordField]: hashedPassword },
+        $unset: { resetPasswordOTP: "", resetPasswordExpires: "" },
+      }
+    );
 
-    res.status(200).json({ message: 'Password reset successful' });
+    res.status(200).json({ message: "Password reset successful" });
   } catch (error) {
-    console.error('Reset Password Error:', error);
-    res.status(500).json({ error: 'Failed to reset password' });
+    console.error("Reset Password Error:", error);
+    res.status(500).json({ error: "Failed to reset password" });
   }
 });
 
