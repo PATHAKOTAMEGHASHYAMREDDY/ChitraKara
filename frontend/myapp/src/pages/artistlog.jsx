@@ -131,6 +131,8 @@ function Artistlog() {
           {loginMessage.text && (
             <div className={`message ${loginMessage.type}`}>{loginMessage.text}</div>
           )}
+          <br></br>
+          <a href="/forgotpassword" style={{textAlign:"center"}}>Forgot Passowrd ?</a>
         </div>
 
         {/* Signup Section */}
