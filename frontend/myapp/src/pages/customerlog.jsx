@@ -131,6 +131,8 @@ function Customerlog() {
           {loginMessage.text && (
             <div className={`message ${loginMessage.type}`}>{loginMessage.text}</div>
           )}
+          <br></br>
+           <a href="/forgotpassword" style={{textAlign:"center"}}>Forgot Passowrd ?</a>
         </div>
 
         {/* Signup Section */}
@@ -185,7 +187,9 @@ function Customerlog() {
           {signupMessage.text && (
             <div className={`message ${signupMessage.type}`}>{signupMessage.text}</div>
           )}
+         
         </div>
+        
       </div>
 
       <button className="home-btn" onClick={() => navigate("/")}>Home</button>
