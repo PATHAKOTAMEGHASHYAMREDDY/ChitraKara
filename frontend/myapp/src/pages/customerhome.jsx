@@ -3,7 +3,6 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/customerhome.css";
 import logo from "../assets/logo.png";
-
 function CustomerHome() {
   const location = useLocation();
   const navigate = useNavigate();

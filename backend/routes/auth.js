@@ -38,8 +38,8 @@ const requestUpload = multer({ storage: requestStorage });
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.EMAIL_USER || "meghashyamreddy014@gmail.com",
-    pass: process.env.EMAIL_PASS || "amfs nznb wsbg snna",
+    user: process.env.EMAIL_USER || "chitrakar.care@gmail.com",
+    pass: process.env.EMAIL_PASS || "jsoo ieox xwls vfrb",
   },
 });
 
