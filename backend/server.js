@@ -8,12 +8,12 @@ const app = express();
 dotenv.config();
 
 // Middleware
-app.use(cors());
+// app.use(cors());
 app.use(express.json())
-// app.use(cors({ 
-//   origin: "https://chitrakar-app.vercel.app", 
-//   credentials: true }));
-app.use(express.json());
+app.use(cors({ 
+  origin: "https://chitrakar-app.vercel.app", 
+  credentials: true }));
+// app.use(express.json());
 
 // MongoDB Connection
 mongoose
