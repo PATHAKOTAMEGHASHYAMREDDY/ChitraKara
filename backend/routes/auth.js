@@ -603,7 +603,6 @@ router.post('/forgot-password', async (req, res) => {
 router.post('/reset-password', async (req, res) => {
   try {
     const { email, userType, otp, newPassword } = req.body;
-
     if (!email || !userType || !otp || !newPassword) {
       return res.status(400).json({ error: 'All fields are required' });
     }
@@ -637,10 +636,10 @@ router.post('/reset-password', async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(newPassword, salt);
 
-    user[passwordField] = hashedPassword;
+    user[passwordField] = hashedPassword; // Updates the password in MongoDB
     user.resetPasswordOTP = undefined;
     user.resetPasswordExpires = undefined;
-    await user.save();
+    await user.save(); // Saves the updated document to MongoDB
 
     res.status(200).json({ message: 'Password reset successful' });
   } catch (error) {

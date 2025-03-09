@@ -3,14 +3,16 @@ import axios from 'axios';
 
 function ForgotPassword() {
   const [email, setEmail] = useState('');
-  const [userType, setUserType] = useState('customer'); // Added userType state
+  const [userType, setUserType] = useState('customer');
   const [otp, setOtp] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [step, setStep] = useState(1); // 1: Enter email and user type, 2: Enter OTP and new passwords
+  const [step, setStep] = useState(1);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false); // State for new password visibility
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // State for confirm password visibility
 
   const handleSendOTP = async (e) => {
     e.preventDefault();
@@ -18,7 +20,7 @@ function ForgotPassword() {
     try {
       const response = await axios.post('https://chitra-kara-api.vercel.app/api/forgot-password', {
         email,
-        userType, // Include userType in the request
+        userType,
       });
       setMessage(response.data.message);
       setError('');
@@ -42,12 +44,16 @@ function ForgotPassword() {
     try {
       const response = await axios.post('https://chitra-kara-api.vercel.app/api/reset-password', {
         email,
-        userType, // Include userType in the request
+        userType,
         otp,
         newPassword,
       });
       setMessage(response.data.message);
       setError('');
+      // Optional: Reset form or redirect after success
+      setOtp('');
+      setNewPassword('');
+      setConfirmPassword('');
     } catch (err) {
       setError(err.response?.data?.error || 'Something went wrong');
       setMessage('');
@@ -101,25 +107,53 @@ function ForgotPassword() {
               className="input-field"
             />
           </div>
-          <div className="input-group">
+          <div className="input-group password-group">
             <label>New Password:</label>
             <input
-              type="password"
+              type={showNewPassword ? 'text' : 'password'}
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               required
               className="input-field"
             />
+            <span
+              className="password-toggle"
+              onClick={() => setShowNewPassword(!showNewPassword)}
+            >
+              {showNewPassword ? (
+                <svg className="eye-icon" viewBox="0 0 24 24">
+                  <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                </svg>
+              ) : (
+                <svg className="eye-icon" viewBox="0 0 24 24">
+                  <path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46A11.804 11.804 0 0 0 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zM11.84 9.02l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z" />
+                </svg>
+              )}
+            </span>
           </div>
-          <div className="input-group">
+          <div className="input-group password-group">
             <label>Confirm Password:</label>
             <input
-              type="password"
+              type={showConfirmPassword ? 'text' : 'password'}
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
               className="input-field"
             />
+            <span
+              className="password-toggle"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            >
+              {showConfirmPassword ? (
+                <svg className="eye-icon" viewBox="0 0 24 24">
+                  <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                </svg>
+              ) : (
+                <svg className="eye-icon" viewBox="0 0 24 24">
+                  <path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46A11.804 11.804 0 0 0 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zM11.84 9.02l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z" />
+                </svg>
+              )}
+            </span>
           </div>
           <button type="submit" className="submit-btn" disabled={loading}>
             {loading ? <span className="loader"></span> : 'Reset Password'}
@@ -168,6 +202,10 @@ function ForgotPassword() {
           text-align: left;
         }
 
+        .password-group {
+          position: relative;
+        }
+
         label {
           display: block;
           margin-bottom: 5px;
@@ -182,7 +220,7 @@ function ForgotPassword() {
           border-radius: 5px;
           font-size: 16px;
           transition: border-color 0.3s ease;
-          background: white; /* Ensure dropdown has a white background */
+          background: white;
         }
 
         .input-field:focus {
@@ -192,11 +230,31 @@ function ForgotPassword() {
         }
 
         select.input-field {
-          appearance: none; /* Remove default arrow for custom styling */
+          appearance: none;
           background: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>')
             no-repeat right 10px center;
           background-size: 12px;
-          padding-right: 30px; /* Space for the custom arrow */
+          padding-right: 30px;
+        }
+
+        .password-toggle {
+          position: absolute;
+          right: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+          cursor: pointer;
+          padding: 5px;
+        }
+
+        .eye-icon {
+          width: 20px;
+          height: 20px;
+          fill: #555;
+          transition: fill 0.3s ease;
+        }
+
+        .password-toggle:hover .eye-icon {
+          fill: #007bff;
         }
 
         .submit-btn {
