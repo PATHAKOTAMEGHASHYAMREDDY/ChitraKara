@@ -18,7 +18,7 @@ function ForgotPassword() {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post('https://chitra-kara-api.vercel.app/api/forgot-password', {
+      const response = await axios.post(`${import.meta.env}/api/forgot-password`, {
         email,
         userType,
       });
@@ -42,7 +42,7 @@ function ForgotPassword() {
     }
     setLoading(true);
     try {
-      const response = await axios.post('https://chitra-kara-api.vercel.app/api/reset-password', {
+      const response = await axios.post(`${import.meta.env}/api/reset-password`, {
         email,
         userType,
         otp,

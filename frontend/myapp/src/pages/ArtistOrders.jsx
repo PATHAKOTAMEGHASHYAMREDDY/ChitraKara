@@ -11,7 +11,7 @@ function ArtistOrders() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get("https://chitra-kara-api.vercel.app/api/orders");
+        const response = await axios.get(`${import.meta.env}/api/orders`);
         setOrders(response.data.filter((order) => order.artistName === username));
       } catch (error) {
         console.error("Error fetching orders:", error);

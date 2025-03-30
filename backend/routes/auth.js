@@ -13,7 +13,6 @@ const CustomPaintingRequest = require("../models/custompaintingrequest");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 
-// Cloudinary Configuration
 cloudinary.config({
   cloud_name: "dktvtxucf",
   api_key: "387231481659719",
