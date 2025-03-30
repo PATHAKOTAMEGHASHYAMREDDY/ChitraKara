@@ -20,7 +20,7 @@ function Artisthome() {
   useEffect(() => {
     const fetchCustomRequests = async () => {
       try {
-        const response = await axios.get(`${import.meta.env}/api/customrequests/${username}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/customrequests/${username}`);
         setCustomRequests(response.data);
       } catch (error) {
         console.error("Error fetching custom requests:", error);
@@ -40,7 +40,7 @@ function Artisthome() {
     formData.append("artist", username);
 
     try {
-      const response = await axios.post(`${import.meta.env}/api/uploadpainting`, formData, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/uploadpainting`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setUploadMessage({ text: response.data.message, type: "success" });
@@ -60,7 +60,7 @@ function Artisthome() {
 
   const handleAcceptRequest = async (requestId) => {
     try {
-      const response = await axios.put(`${import.meta.env}/api/customrequests/${requestId}`, {
+      const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/customrequests/${requestId}`, {
         status: "accepted",
       });
       setAcceptMessage({ text: response.data.message, type: "success" });
@@ -77,7 +77,7 @@ function Artisthome() {
 
   const handleRejectRequest = async (requestId) => {
     try {
-      const response = await axios.put(`${import.meta.env}/api/customrequests/${requestId}`, {
+      const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/customrequests/${requestId}`, {
         status: "rejected",
       });
       setAcceptMessage({ text: response.data.message, type: "success" });

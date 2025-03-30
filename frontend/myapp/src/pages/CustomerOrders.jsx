@@ -20,7 +20,7 @@ function CustomerOrders() {
 
       try {
         setLoading(true);
-        const response = await axios.get(`${import.meta.env}/api/customerorders/${username}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/customerorders/${username}`);
         setOrders(response.data || []); // Ensure orders is always an array
         setError(null);
       } catch (error) {

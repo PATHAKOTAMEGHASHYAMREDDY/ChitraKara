@@ -35,7 +35,7 @@ function Artistlog() {
     e.preventDefault();
     setIsLoginLoading(true);
     try {
-      const response = await axios.post(`${import.meta.env}/api/artistlogin`, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/artistlogin`, {
         semail: loginEmail,
         spassword: loginPassword,
       });
@@ -57,7 +57,7 @@ function Artistlog() {
     e.preventDefault();
     setIsSignupLoading(true);
     try {
-      const response = await axios.post(`${import.meta.env}/api/artistsignup`, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/artistsignup`, {
         sname,
         semail: signupEmail,
         spassword: signupPassword,

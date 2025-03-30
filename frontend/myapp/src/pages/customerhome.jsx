@@ -31,8 +31,8 @@ function CustomerHome() {
     try {
       setLoading(true);
       const [paintingsResponse, artistsResponse] = await Promise.all([
-        axios.get(`${import.meta.env}/api/paintings`),
-        axios.get(`${import.meta.env}/api/artists`),
+        axios.get(`${import.meta.env.VITE_API_URL}/api/paintings`),
+        axios.get(`${import.meta.env.VITE_API_URL}/api/artists`),
       ]);
       setPaintings(paintingsResponse.data || []);
       setArtists(artistsResponse.data || []);
@@ -46,7 +46,7 @@ function CustomerHome() {
   const fetchCustomerRequests = async () => {
     try {
       const email = location.state?.email || `${username}@example.com`;
-      const requestsResponse = await axios.get(`${import.meta.env}/api/myrequests/${email}`);
+      const requestsResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/myrequests/${email}`);
       setCustomerRequests(requestsResponse.data || []);
     } catch (error) {
       console.error("Error fetching customer requests:", error);
@@ -85,7 +85,7 @@ function CustomerHome() {
         customerAddress: orderDetails.address,
         customerPhone: orderDetails.phone,
       };
-      await axios.post(`${import.meta.env}/api/order`, orderData);
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/order`, orderData);
       alert(`Order placed for ${selectedPainting.title}! An email has been sent to ${selectedPainting.artist}.`);
       setShowOrderPopup(false);
       setOrderDetails({ name: username || "", address: "", phone: "" });
@@ -112,7 +112,7 @@ function CustomerHome() {
 
     try {
       const response = await axios.post(
-        `${import.meta.env}/api/custompaintingrequest`,
+        `${import.meta.env.VITE_API_URL}/api/custompaintingrequest`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );

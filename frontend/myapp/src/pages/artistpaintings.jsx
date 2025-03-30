@@ -13,7 +13,7 @@ function Artistpaintings() {
     useEffect(() => {
         const fetchPaintings = async () => {
             try {
-                const response = await axios.get(`${import.meta.env}/api/paintings`);
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/paintings`);
                 setPaintings(response.data.filter((painting) => painting.artist === username));
             } catch (error) {
                 console.error("Error fetching paintings:", error);
@@ -25,7 +25,7 @@ function Artistpaintings() {
     const handleDelete = async (paintingId) => {
         if (window.confirm("Are you sure you want to delete this painting?")) {
             try {
-                await axios.delete(`${import.meta.env}/api/paintings/${paintingId}`, {
+                await axios.delete(`${import.meta.env.VITE_API_URL}/api/paintings/${paintingId}`, {
                     params: { artist: username }
                 });
                 setPaintings(paintings.filter(painting => painting._id !== paintingId));
