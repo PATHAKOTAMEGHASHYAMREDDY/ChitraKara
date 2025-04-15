@@ -113,7 +113,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Home.css";
 import logo from "../assets/logo.png"; // Your logo
-import paintingImage from "../assets/painting-image.png"; // Replace with your actual painting image filename
+import frontData from "../assets/front.json"; // Import JSON data for Lottie animation
+import Lottie from "lottie-react"; // Import Lottie component
 import { FaLinkedin } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -150,7 +151,15 @@ function Home() {
       <section className="hero-section">
         <div className="hero-content-wrapper">
           <div className="hero-image-container">
-            <img src={paintingImage} alt="Painting" className="hero-image" />
+            {/* Using Lottie animation instead of showing raw JSON */}
+            <div className="lottie-container">
+              <Lottie
+                animationData={frontData}
+                loop={true}
+                autoplay={true}
+                className="lottie-animation"
+              />
+            </div>
           </div>
           <div className="hero-text-container">
             <h2 className="hero-title">Unleash Your Creativity</h2>

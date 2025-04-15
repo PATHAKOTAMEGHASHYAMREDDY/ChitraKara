@@ -349,4 +349,48 @@
     max-width: 250px;
     margin: 0 auto;
   }
+
+  .lottie-container {
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+}
+
+/* Lottie Animation */
+.lottie-container {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.lottie-container:hover {
+  transform: scale(1.05);
+}
+
+.lottie-animation {
+  width: 100%;
+  height: 100%;
+}
+
+/* Remove these styles as they're no longer needed */
+.json-content {
+  display: none;
+}
+
+.json-display {
+  display: none;
+}
+
+/* Make sure the hero-image-container is styled correctly */
+.hero-image-container {
+  display: flex;
+  flex: 1;
+  max-width: 50%;
+  height: auto;
+  animation: slideInFromLeft 1s ease-out;
 }
