@@ -27,6 +27,7 @@ function Artisthome() {
 
   // Orders States
   const [orders, setOrders] = useState([]);
+  const [deletePopup, setDeletePopup] = useState({ show: false, paintingId: null });
 
   // Chat States
   const [chatRequests, setChatRequests] = useState([]);
@@ -41,6 +42,12 @@ function Artisthome() {
   const showToast = (message, type = "success") => {
     setToast({ show: true, message, type });
     setTimeout(() => setToast({ show: false, message: "", type: "" }), 3000);
+  };
+
+  // Logout Handler
+  const handleLogout = () => {
+    navigate("/");
+    showToast("Logged out successfully");
   };
 
   // Fetch Data Based on Active Section
@@ -166,17 +173,24 @@ function Artisthome() {
 
   // Painting Delete Handler
   const handleDelete = async (paintingId) => {
-    if (window.confirm("Are you sure you want to delete this painting?")) {
-      try {
-        await axios.delete(`${import.meta.env.VITE_API_URL}/api/paintings/${paintingId}`, {
-          params: { artist: username },
-        });
-        setPaintings((prev) => prev.filter((painting) => painting._id !== paintingId));
-        showToast("Painting deleted successfully");
-      } catch (error) {
-        showToast("Failed to delete painting", "error");
-      }
+    setDeletePopup({ show: true, paintingId });
+  };
+
+  const confirmDelete = async () => {
+    try {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/paintings/${deletePopup.paintingId}`, {
+        params: { artist: username },
+      });
+      setPaintings((prev) => prev.filter((painting) => painting._id !== deletePopup.paintingId));
+      showToast("Painting deleted successfully");
+    } catch (error) {
+      showToast("Failed to delete painting", "error");
     }
+    setDeletePopup({ show: false, paintingId: null });
+  };
+
+  const cancelDelete = () => {
+    setDeletePopup({ show: false, paintingId: null });
   };
 
   // Chat Handlers
@@ -266,39 +280,47 @@ function Artisthome() {
             {customRequests.length > 0 ? (
               customRequests.map((request) => (
                 <div key={request._id} className="request-card">
-                  <p><strong>Customer:</strong> {request.name}</p>
-                  <p><strong>Address:</strong> {request.address}</p>
-                  <p><strong>Status:</strong> {request.status}</p>
-                  <p><strong>Phone:</strong> {request.phone}</p>
-                  <div className="request-image-wrapper">
-                    <img src={request.imageUrl} alt="Reference" className="request-image" />
+                  <div className="request-card-header">
+                    <p><strong>Customer:</strong> {request.name}</p>
+                    <p><strong>Address:</strong> {request.address}</p>
+                    <p><strong>Status:</strong> {request.status}</p>
+                    <p><strong>Phone:</strong> {request.phone}</p>
                   </div>
-                  <div className="button-group">
-                    {request.status === "pending" && (
-                      <>
-                        <button
-                          className="accept-button"
-                          onClick={() => handleAcceptRequest(request._id)}
-                        >
-                          Accept
-                        </button>
-                        <button
-                          className="reject-button"
-                          onClick={() => handleRejectRequest(request._id)}
-                        >
-                          Reject
-                        </button>
-                      </>
-                    )}
-                    <button
-                      className="download-button"
-                      onClick={() =>
-                        handleDownload(request.imageUrl, `${request.name}-custom-request.jpg`)
-                      }
-                      disabled={request.status !== "accepted"}
-                    >
-                      Download
-                    </button>
+                  
+                  <div className="request-card-body">
+                    <div className="request-image-wrapper">
+                      <img src={request.imageUrl} alt="Reference" className="request-image" />
+                    </div>
+                  </div>
+                  
+                  <div className="request-card-footer">
+                    <div className="button-group">
+                      {request.status === "pending" && (
+                        <>
+                          <button
+                            className="accept-button"
+                            onClick={() => handleAcceptRequest(request._id)}
+                          >
+                            Accept
+                          </button>
+                          <button
+                            className="reject-button"
+                            onClick={() => handleRejectRequest(request._id)}
+                          >
+                            Reject
+                          </button>
+                        </>
+                      )}
+                      <button
+                        className="download-button"
+                        onClick={() =>
+                          handleDownload(request.imageUrl, `${request.name}-custom-request.jpg`)
+                        }
+                        disabled={request.status !== "accepted"}
+                      >
+                        Download
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))
@@ -312,22 +334,24 @@ function Artisthome() {
           <div className="paintings-container">
             <h2>{username}'s Paintings</h2>
             {paintings.length > 0 ? (
-              paintings.map((painting) => (
-                <div key={painting._id} className="painting-card">
-                  <div className="painting-image-wrapper">
-                    <img src={painting.imageUrl} alt={painting.title} className="painting-image" />
+              <div className="paintings-grid">
+                {paintings.map((painting) => (
+                  <div key={painting._id} className="painting-card">
+                    <div className="painting-image-wrapper">
+                      <img src={painting.imageUrl} alt={painting.title} className="painting-image" />
+                    </div>
+                    <h3>{painting.title}</h3>
+                    <p>Price: ₹{painting.price}</p>
+                    <p>Contact: {painting.contact}</p>
+                    <button
+                      onClick={() => handleDelete(painting._id)}
+                      className="delete-button"
+                    >
+                      Delete
+                    </button>
                   </div>
-                  <h3>{painting.title}</h3>
-                  <p>Price: ₹{painting.price}</p>
-                  <p>Contact: {painting.contact}</p>
-                  <button
-                    onClick={() => handleDelete(painting._id)}
-                    className="delete-button"
-                  >
-                    Delete
-                  </button>
-                </div>
-              ))
+                ))}
+              </div>
             ) : (
               <p className="no-requests">No paintings uploaded yet!</p>
             )}
@@ -338,19 +362,23 @@ function Artisthome() {
           <div className="orders-container">
             <h2>{username}'s Orders</h2>
             {orders.length > 0 ? (
-              orders.map((order) => (
-                <div key={order._id} className="order-card">
-                  <div className="order-image-wrapper">
-                    <img src={order.imageUrl} alt={order.paintingTitle} className="order-image" />
+              <div className="orders-grid">
+                {orders.map((order) => (
+                  <div key={order._id} className="order-card">
+                    <div className="order-image-wrapper">
+                      <img src={order.imageUrl} alt={order.paintingTitle} className="order-image" />
+                    </div>
+                    <h3 className="order-title">{order.paintingTitle}</h3>
+                    <div className="order-card-details">
+                      <p><strong>Price:</strong> ₹{order.price}</p>
+                      <p><strong>Ordered by:</strong> {order.customerName}</p>
+                      <p><strong>Customer Address:</strong> {order.customerAddress}</p>
+                      <p><strong>Customer Phone:</strong> {order.customerPhone}</p>
+                      <p><strong>Artist Contact:</strong> {order.contact}</p>
+                    </div>
                   </div>
-                  <h3>{order.paintingTitle}</h3>
-                  <p>Price: ₹{order.price}</p>
-                  <p>Ordered by: {order.customerName}</p>
-                  <p>Customer Address: {order.customerAddress}</p>
-                  <p>Customer Phone: {order.customerPhone}</p>
-                  <p>Artist Contact: {order.contact}</p>
-                </div>
-              ))
+                ))}
+              </div>
             ) : (
               <p className="no-requests">No orders received yet!</p>
             )}
@@ -443,6 +471,9 @@ function Artisthome() {
           <li className={activeSection === "chat" ? "active" : ""} onClick={() => { setActiveSection("chat"); setSidebarOpen(false); }}>
             Chat with Customers
           </li>
+          <li className="logout-item" onClick={handleLogout}>
+            Logout
+          </li>
         </ul>
       </div>
 
@@ -458,6 +489,19 @@ function Artisthome() {
       {toast.show && (
         <div className={`toast-notification toast-${toast.type}`}>
           {toast.message}
+        </div>
+      )}
+
+      {deletePopup.show && (
+        <div className="popup-overlay">
+          <div className="popup-content delete-popup">
+            <h3>Confirm Delete</h3>
+            <p>Are you sure you want to delete this painting?</p>
+            <div className="popup-buttons">
+              <button className="cancel-button" onClick={cancelDelete}>Cancel</button>
+              <button className="delete-button" onClick={confirmDelete}>Delete</button>
+            </div>
+          </div>
         </div>
       )}
     </div>

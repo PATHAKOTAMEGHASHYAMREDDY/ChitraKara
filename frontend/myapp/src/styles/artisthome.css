@@ -213,58 +213,165 @@
 
 /* Custom Requests Container */
 .custom-requests-container {
-  background: #ffffff;
-  padding: clamp(20px, 4vw, 30px);
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to bottom, #fafafa, #f3f4f6);
+  padding: clamp(25px, 4vw, 35px);
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   width: 100%;
-  border: 1px solid #ddd;
+  border: 1px solid #e0e0e0;
 }
 
 .custom-requests-container h2 {
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  color: #0f1111;
-  margin-bottom: 20px;
-  text-align: left;
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  color: #111827;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .request-card {
-  background: #ffffff;
-  padding: clamp(15px, 3vw, 20px);
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  margin-bottom: 15px;
-  border: 1px solid #eee;
-  transition: box-shadow 0.3s ease;
+  background: linear-gradient(to bottom, #ffffff, #f9fafb);
+  padding: 0;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  margin-bottom: 25px;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .request-card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.request-card p {
-  font-size: clamp(0.9rem, 2.5vw, 1rem);
-  color: #0f1111;
-  margin: 5px 0;
+.request-card-header {
+  background: linear-gradient(to right, #1a1a1a, #2d2d2d);
+  color: white;
+  padding: 15px 20px;
+  border-bottom: 1px solid #333;
 }
 
-.request-card p strong {
-  color: #ff9900;
+.request-card-header p {
+  color: white;
+  margin: 8px 0;
+  font-size: 1rem;
+  text-align: right;
 }
 
+.request-card-header p strong {
+  color: #00b8ff;
+  font-weight: 600;
+  margin-right: 8px;
+  display: inline-block;
+  min-width: 80px;
+  text-align: right;
+}
+
+/* Request image styling */
 .request-image-wrapper {
-  margin: 15px 0;
-  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 240px;
+  padding: 15px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
-  border-radius: 4px;
-  border: 1px solid #ddd;
+  border-bottom: 1px solid #eee;
 }
 
 .request-image {
-  width: 100%;
+  max-width: 100%;
+  max-height: 400px;
   height: auto;
-  max-height: 200px;
-  object-fit: cover;
+  display: block;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Button group in request card */
+.request-card .button-group {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin: 0;
+  padding: 20px;
+  background-color: #f0f2f5;
+  border-top: 1px solid #e5e7eb;
+}
+
+.request-card .accept-button, 
+.request-card .reject-button,
+.request-card .download-button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+  text-align: center;
+}
+
+.request-card .accept-button {
+  background: #ffffff;
+  color: #333;
+  border: 1px solid #dddddd;
+}
+
+.request-card .accept-button:hover {
+  background: #f8f8f8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.request-card .reject-button {
+  background: #ffffff;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+.request-card .reject-button:hover {
+  background: #fff8f8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.15);
+}
+
+.request-card .download-button {
+  background: #4477ee;
+  color: white;
+  border: none;
+}
+
+.request-card .download-button:hover {
+  background: #3366dd;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(68, 119, 238, 0.3);
+}
+
+.request-card .download-button:disabled {
+  background: #e9ecef;
+  color: #868e96;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  border: 1px solid #dee2e6;
+}
+
+.no-requests {
+  font-size: clamp(1rem, 3vw, 1.1rem);
+  color: #565959;
+  text-align: center;
+  margin-top: 20px;
+  padding: 30px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  border: 1px dashed #ccc;
 }
 
 /* Paintings Container */
@@ -386,59 +493,106 @@
 /* Orders Container */
 .orders-container {
   background: #ffffff;
-  padding: clamp(20px, 4vw, 30px);
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: clamp(25px, 4vw, 35px);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   width: 100%;
-  border: 1px solid #ddd;
+  border: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.orders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  width: 100%;
 }
 
 .orders-container h2 {
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  color: #0f1111;
-  margin-bottom: 20px;
-  text-align: left;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  color: #111;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .order-card {
   background: #ffffff;
-  padding: clamp(15px, 3vw, 20px);
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  margin-bottom: 15px;
-  border: 1px solid #eee;
-  transition: box-shadow 0.3s ease;
+  padding: 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0f0f0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  margin: 0 auto 30px;
 }
 
 .order-card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .order-image-wrapper {
-  margin: 15px 0;
+  margin: 10px auto;
   position: relative;
-  overflow: hidden;
-  border-radius: 4px;
-  border: 1px solid #ddd;
+  overflow: visible;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background-color: transparent;
 }
 
 .order-image {
-  width: 100%;
+  max-width: 100%;
   height: auto;
-  max-height: 200px;
+  aspect-ratio: 3/4;
   object-fit: cover;
+  display: block;
+  border: 2px solid #ff9900;
+  border-radius: 6px;
 }
 
-.order-card h3 {
-  font-size: clamp(1.2rem, 3vw, 1.5rem);
-  color: #0f1111;
-  margin-bottom: 10px;
+.order-title {
+  font-size: 1.6rem;
+  color: #000;
+  margin: 10px 0;
+  font-weight: 600;
+  text-align: center;
+  padding: 0 15px;
 }
 
-.order-card p {
-  font-size: clamp(0.9rem, 2.5vw, 1rem);
-  color: #0f1111;
-  margin: 5px 0;
+.order-card-details {
+  padding: 5px 15px 20px;
+  background-color: white;
+  text-align: center;
+}
+
+.order-card-details p {
+  margin: 10px 0;
+  font-size: 1rem;
+  color: #555;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.order-card-details p strong {
+  font-weight: 600;
+  color: #555;
+  margin-right: 5px;
+}
+
+/* Update the Order card details in artisthome.jsx */
+.order-card-header {
+  display: none;
 }
 
 /* Chat Container */
@@ -808,6 +962,17 @@
   .paintings-grid {
     grid-template-columns: 1fr;
   }
+
+  .request-card .button-group {
+    padding: 15px 10px;
+  }
+  
+  .request-card .accept-button,
+  .request-card .reject-button,
+  .request-card .download-button {
+    width: 100%;
+    min-width: 0;
+  }
 }
 
 @media (max-width: 480px) {
@@ -858,4 +1023,127 @@
   .chat-input button {
     width: 100%;
   }
+}
+
+.request-card .button-group {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin: 0;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #eee;
+  flex-wrap: wrap;
+}
+
+.request-card .accept-button,
+.request-card .reject-button,
+.request-card .download-button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 130px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.request-card .accept-button {
+  background: #4361ee;
+  color: white;
+}
+
+.request-card .accept-button:hover {
+  background: #3a56d4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(67, 97, 238, 0.3);
+}
+
+.request-card .reject-button {
+  background: #ffffff;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+.request-card .reject-button:hover {
+  background: #ffebee;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.2);
+}
+
+.request-card .download-button {
+  background: #3a86ff;
+  color: white;
+}
+
+.request-card .download-button:hover {
+  background: #2979ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(58, 134, 255, 0.3);
+}
+
+.request-card .download-button:disabled {
+  background: #e9ecef;
+  color: #868e96;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  border: 1px solid #ced4da;
+}
+
+.delete-popup {
+  max-width: 400px;
+  text-align: center;
+  padding: 25px;
+}
+
+.delete-popup h3 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.delete-popup p {
+  color: #666;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.popup-buttons button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.popup-buttons .cancel-button {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.popup-buttons .cancel-button:hover {
+  background-color: #d0d0d0;
+}
+
+.popup-buttons .delete-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.popup-buttons .delete-button:hover {
+  background-color: #c82333;
 }
