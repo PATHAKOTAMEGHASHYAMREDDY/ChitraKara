@@ -181,7 +181,9 @@ Chitrakar/
 
 ## 📸 Screenshots
 
-*(Add screenshots of the application here to showcase its UI and functionality)*
+<img width="1892" height="820" alt="Image" src="https://github.com/user-attachments/assets/ac695e2a-c9b1-4ad3-b612-bf2d9df95f2b" />
+
+<img width="1919" height="855" alt="Image" src="https://github.com/user-attachments/assets/6b229323-2c51-4b59-95ae-ede9a0b85f06" />
 
 ## 🤝 Contributing
 
@@ -197,12 +199,6 @@ Contributions are welcome! Please follow these steps:
 
 This project is licensed under the [MIT License](LICENSE).
 
-## 📬 Contact
 
-For questions or feedback, please contact: [Your Name/Organization] at [your-email@example.com]
 
-## 💖 Thanks Message
 
-Thank you for checking out Chitrakar! We hope this platform helps artists and customers connect and create beautiful art together. Your support and contributions are highly appreciated!
-
-This README is written by [readme.ai](https://readme-generator-phi.vercel.app/).
